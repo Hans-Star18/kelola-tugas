@@ -69,34 +69,17 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Tugas</span>
         </li>
-        <li class="menu-item {{ Request::is('semua_tugas*') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::is('semua_tugas') || Request::is('semua/tugas?*') ? 'active' : '' }}">
             <a href="/semua_tugas" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Semua Tugas">Semua Tugas</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
+        <li class="menu-item {{ Request::is('semua_tugas/create') ? 'active' : '' }}">
+            <a href="/semua_tugas/create" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-add"></i>
+                <div data-i18n="Tambah Tugas">Tambah Tugas</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Login</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Register</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Forgot Password</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

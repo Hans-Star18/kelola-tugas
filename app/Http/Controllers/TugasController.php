@@ -39,6 +39,10 @@ class TugasController extends Controller
     public function create()
     {
         //
+        return view('tugas.tugas_baru', [
+            'title' => 'Tambah Tugas Baru',
+            'mataPelajaran' => MataPelajaran::All(),
+        ]);
     }
 
     /**
