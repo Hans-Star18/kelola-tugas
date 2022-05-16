@@ -39,10 +39,6 @@ class DashboardController extends Controller
                 $tugasLewatWaktuMingguIni[] = $task;
             }
         }
-        // dd($tugasLewatWaktu);
-        // foreach ($tugasLewatWaktu as $tlw) {
-        //     dd($tlw->mataPelajaran->mata_pelajaran);
-        // }
 
         return view('dashboard.index', [
             'title' => 'Dashboard',
