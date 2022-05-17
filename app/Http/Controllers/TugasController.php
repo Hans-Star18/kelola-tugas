@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MataPelajaran;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,9 +40,11 @@ class TugasController extends Controller
     public function create()
     {
         //
+        // dd(date('d-m-Y h:i:s'));
         return view('tugas.tugas_baru', [
             'title' => 'Tambah Tugas Baru',
             'mataPelajaran' => MataPelajaran::All(),
+            // 'tanggalSekarang' => new DateTime('now'),
         ]);
     }
 
@@ -53,7 +56,21 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request());
         //
+        $validateData = $request->validate([
+            'status_id' => 'required',
+            'mata_pelajaran_id' => 'required',
+            'judul_tugas' => 'required|max:255',
+            'deskripsi_tugas' => 'required',
+            'deadline_at' => 'required',
+            'tanggal_dibuat' => 'required',
+            'tanggal_dikumpul' => 'required',
+        ]);
+
+        Task::create($validateData);
+
+        return redirect('/semua_tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
     }
 
     /**
