@@ -181,7 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        App\Providers\StrToDateServiceProvider::class,
+        App\Providers\MyHelpersServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -211,7 +211,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'StrToDate' => App\Helpers\StrToDate::class,
+        'MyHelpers' => App\Helpers\MyHelpers::class,
     ])->toArray(),
 
 ];

@@ -14,6 +14,7 @@ class TugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $tasks = DB::table('tasks')
@@ -40,11 +41,9 @@ class TugasController extends Controller
     public function create()
     {
         //
-        // dd(date('d-m-Y h:i:s'));
         return view('tugas.tugas_baru', [
             'title' => 'Tambah Tugas Baru',
             'mataPelajaran' => MataPelajaran::All(),
-            // 'tanggalSekarang' => new DateTime('now'),
         ]);
     }
 
@@ -122,6 +121,30 @@ class TugasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function setor_tugas()
+    {
+        //
+        return view('tugas.setor_tugas', [
+            'title' => 'Setor Tugas',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function setor(Request $request)
     {
         //
     }

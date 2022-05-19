@@ -81,23 +81,11 @@
                 <div data-i18n="Tambah Tugas">Tambah Tugas</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Misc</div>
+        <li class="menu-item {{ Request::is('semua_tugas/setor') ? 'active' : '' }}">
+            <a href="/semua_tugas/setor" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-git-commit"></i>
+                <div data-i18n="Setor Tugas">Setor Tugas</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="pages-misc-error.html" class="menu-link">
-                        <div data-i18n="Error">Error</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="pages-misc-under-maintenance.html" class="menu-link">
-                        <div data-i18n="Under Maintenance">Under Maintenance</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <!-- Components -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>

@@ -41,7 +41,7 @@
                     $count = collect([]);
                 @endphp
                 @foreach ($tasks as $task)
-                    @if ($task->status_id == 0 && StrToDate::strtodate($task->deadline_at)->diff()->invert == 1)
+                    @if ($task->status_id == 0 && MyHelpers::strtodate($task->deadline_at)->diff()->invert == 1)
                         @php
                             $count[] = $task;
                         @endphp
@@ -53,7 +53,7 @@
                                     {{ $task->judul_tugas }}
                                 </span>
                             </td>
-                            <td>{{ StrToDate::strtodate($task->deadline_at)->diffForHumans() }}</td>
+                            <td>{{ MyHelpers::strtodate($task->deadline_at)->diffForHumans() }}</td>
                             <td>
                                 <div class="badge bg-warning">{{ $task->status_name }}</div>
                             </td>

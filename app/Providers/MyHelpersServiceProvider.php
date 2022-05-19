@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class StrToDateServiceProvider extends ServiceProvider
+class MyHelpersServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -13,7 +13,7 @@ class StrToDateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path() . '/Helpers/StrToDate.php';
+        require_once app_path() . '/Helpers/MyHelpers.php';
     }
 
     /**

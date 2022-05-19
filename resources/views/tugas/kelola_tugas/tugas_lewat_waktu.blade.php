@@ -41,7 +41,7 @@
                     $count = collect([]);
                 @endphp
                 @foreach ($tasks as $task)
-                    @if ($task->status_id == 0 && StrToDate::strtodate($task->deadline_at)->diff()->invert == 0)
+                    @if ($task->status_id == 0 && MyHelpers::strtodate($task->deadline_at)->diff()->invert == 0)
                         @php
                             $count[] = $task;
                         @endphp

@@ -3,12 +3,7 @@
 @section('content')
     <!-- Content -->
     <div class="container mt-4">
-        {{-- @if (session()->has('success'))
-            <div class="alert alert-success col-lg-8" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif --}}
-        <div class="bs-toast toast toast-placement-ex top-0 start-0 fade {{ session()->has('success') ? 'show' : '' }} m-2"
+        <div class="bs-toast toast toast-placement-ex bg-success top-0 start-0 fade {{ session()->has('success') ? 'show' : '' }} m-2"
             role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <i class="bx bx-bell me-2"></i>
