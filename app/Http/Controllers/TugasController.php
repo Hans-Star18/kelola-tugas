@@ -137,5 +137,6 @@ class TugasController extends Controller
     public function setor(Request $request)
     {
         //
+        dump($request);
     }
 }
