@@ -30,10 +30,3 @@ horizontalExample.forEach(function (e) {
         suppressScrollY: true,
     });
 });
-
-var options = {
-    scrollingContainer: "#scrolling-container",
-    placeholder: "Ketik Jawaban Disini...",
-    theme: "snow",
-};
-var editor = new Quill("#editor", options);
