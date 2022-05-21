@@ -20,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [DashboardController::class, 'index']);
-// Route::get('/semua_tugas', [TugasController::class, 'index']);
-// Route::get('/semua_tugas/detail', [TugasController::class, 'detail']);
 
-Route::get('/semua_tugas/setor', [TugasController::class, 'setor_tugas']);
-Route::post('/semua_tugas/setor', [TugasController::class, 'setor']);
-Route::resource('/semua_tugas', TugasController::class);
+Route::get('/tugas/setor', [TugasController::class, 'setor_tugas']);
+Route::post('/tugas/setor', [TugasController::class, 'setor']);
+Route::resource('/tugas', TugasController::class);

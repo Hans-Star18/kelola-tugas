@@ -20,7 +20,7 @@
                                     terselesaikan.
                                 </p>
 
-                                <a href="/semua_tugas" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                                <a href="/tugas" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">

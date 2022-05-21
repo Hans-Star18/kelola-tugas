@@ -64,7 +64,7 @@ class TugasController extends Controller
 
         Task::create($validateData);
 
-        return redirect('/semua_tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
+        return redirect('/tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
     }
 
     /**

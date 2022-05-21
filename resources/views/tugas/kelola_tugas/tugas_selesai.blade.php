@@ -11,13 +11,13 @@
         </button>
         <ul class="dropdown-menu vertical-example" style="max-height: 200px;">
             <li>
-                <a class="dropdown-item" href="/semua_tugas">
+                <a class="dropdown-item" href="tugas">
                     Semua
                 </a>
             </li>
             @foreach ($mataPelajaran as $mp)
                 <li>
-                    <a class="dropdown-item" href="/semua_tugas?mata_pelajaran={{ $mp->mata_pelajaran }}">
+                    <a class="dropdown-item" href="tugas?mata_pelajaran={{ $mp->mata_pelajaran }}">
                         {{ $mp->mata_pelajaran }}
                     </a>
                 </li>
@@ -63,7 +63,7 @@
                                 <div class="badge bg-success">{{ $task->status_name }}</div>
                             </td>
                             <td>
-                                <a href="/semua_tugas/{{ $task->id }}" class="badge bg-info">Detail</a>
+                                <a href="tugas/{{ $task->id }}" class="badge bg-info">Detail</a>
                             </td>
                         </tr>
                     @endif
