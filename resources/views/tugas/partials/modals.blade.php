@@ -23,8 +23,8 @@
                                 <div id="accordionIcon-1" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
-                                        <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-                                        <trix-editor input="body"></trix-editor>
+                                        <input id="isi_jawaban" type="hidden" name="isi_jawaban">
+                                        <trix-editor input="isi_jawaban"></trix-editor>
                                     </div>
                                 </div>
                             </div>
