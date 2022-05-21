@@ -21,6 +21,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -101,6 +102,8 @@
 
 
     <!-- Core JS -->
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <!-- build:js assets/vendor/js/core.js -->
     <script src="/vendor/libs/swiper/swiper-bundle.min.js"></script>
@@ -118,6 +121,12 @@
     <!-- Main JS -->
     <script src="/js/script.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#default'
+        });
+    </script>
 
     <!-- Page JS -->
     <script src="/js/dashboards-analytics.js"></script>

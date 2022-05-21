@@ -34,7 +34,7 @@
             <div class="badge bg-secondary">{{ $task->mata_pelajaran }}</div>
         </div>
         <div class="card-body">
-            <a href="/semua_tugas" class="card-link">Kembali</a>
+            <a href="/tugas" class="card-link">Kembali</a>
             <a href="javascript:void(0)" class="card-link">Download</a>
         </div>
     </div>

@@ -17,7 +17,7 @@
         <div class="card">
             <h5 class="card-header">Tambah Tugas Baru</h5>
             <div class="card-body">
-                <form action="/semua_tugas" method="POST">
+                <form action="/tugas" method="POST">
                     @csrf
                     <input type="hidden" id="status" name="status_id" value="0">
                     <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MyHelpers;
 use App\Models\MataPelajaran;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TugasController extends Controller
 {
@@ -17,11 +17,7 @@ class TugasController extends Controller
 
     public function index()
     {
-        $tasks = DB::table('tasks')
-            ->join('mata_pelajaran', 'tasks.mata_pelajaran_id', '=', 'mata_pelajaran.id')
-            ->join('statuses', 'tasks.status_id', '=', 'statuses.id')
-            ->select('tasks.id', 'tasks.status_id', 'tasks.judul_tugas', 'tasks.deskripsi_tugas', 'tasks.deadline_at', 'tasks.tanggal_dibuat', 'tasks.tanggal_dikumpul', 'mata_pelajaran.mata_pelajaran', 'statuses.status_name');
-
+        $tasks = MyHelpers::tasks();
         if (request('mata_pelajaran')) {
             $tasks = $tasks->where('mata_pelajaran', request('mata_pelajaran'));
         }
@@ -55,7 +51,6 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(request());
         //
         $validateData = $request->validate([
             'status_id' => 'required',
@@ -69,7 +64,7 @@ class TugasController extends Controller
 
         Task::create($validateData);
 
-        return redirect('/semua_tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
+        return redirect('/tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
     }
 
     /**
@@ -80,14 +75,8 @@ class TugasController extends Controller
      */
     public function show($id)
     {
-        $task = DB::table('tasks')
-            ->join('mata_pelajaran', 'tasks.mata_pelajaran_id', '=', 'mata_pelajaran.id')
-            ->join('statuses', 'tasks.status_id', '=', 'statuses.id')
-            ->select('tasks.id', 'tasks.status_id', 'tasks.judul_tugas', 'tasks.deskripsi_tugas', 'tasks.deadline_at', 'tasks.tanggal_dibuat', 'tasks.tanggal_dikumpul', 'mata_pelajaran.mata_pelajaran', 'statuses.status_name')
-            ->where('tasks.id', $id);
-
         return view('tugas.detail_tugas', [
-            'task' => $task->get()[0],
+            'task' => MyHelpers::tasks()->where('tasks.id', $id)->first(),
         ]);
     }
 
@@ -135,6 +124,7 @@ class TugasController extends Controller
         //
         return view('tugas.setor_tugas', [
             'title' => 'Setor Tugas',
+            'tasks' => MyHelpers::tasks()->get()->where('status_id', 0),
         ]);
     }
 

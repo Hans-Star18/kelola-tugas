@@ -69,20 +69,20 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Tugas</span>
         </li>
-        <li class="menu-item {{ Request::is('semua_tugas') || Request::is('semua/tugas?*') ? 'active' : '' }}">
-            <a href="/semua_tugas" class="menu-link">
+        <li class="menu-item {{ Request::is('tugas') || Request::is('tugas?*') ? 'active' : '' }}">
+            <a href="/tugas" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Semua Tugas">Semua Tugas</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::is('semua_tugas/create') ? 'active' : '' }}">
-            <a href="/semua_tugas/create" class="menu-link">
+        <li class="menu-item {{ Request::is('tugas/create') ? 'active' : '' }}">
+            <a href="/tugas/create" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book-add"></i>
                 <div data-i18n="Tambah Tugas">Tambah Tugas</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::is('semua_tugas/setor') ? 'active' : '' }}">
-            <a href="/semua_tugas/setor" class="menu-link">
+        <li class="menu-item {{ Request::is('tugas/setor') ? 'active' : '' }}">
+            <a href="/tugas/setor" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-git-commit"></i>
                 <div data-i18n="Setor Tugas">Setor Tugas</div>
             </a>
