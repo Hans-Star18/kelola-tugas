@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MyHelpers;
+use App\Models\Answer;
 use App\Models\MataPelajaran;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -137,6 +138,17 @@ class TugasController extends Controller
     public function setor(Request $request)
     {
         //
-        dump($request);
+        $validateData = $request->validate([
+            'isi_jawaban' => 'required',
+            'id_task' => 'required',
+            'komentar' => '',
+        ]);
+
+        Answer::create($validateData);
+        Task::where("id", $request->id_task)->update([
+            'status_id' => 1,
+        ]);
+
+        return redirect('/tugas')->with('success', 'Tugas Sudah Terkumpul!!!');
     }
 }

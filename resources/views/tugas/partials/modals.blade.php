@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <input type="hidden" name="id_task" id="id_task">
                             <div class="accordion-item card">
                                 <h2 class="accordion-header text-body d-flex justify-content-between"
                                     id="accordionIconTwo">
@@ -41,7 +41,7 @@
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
                                         <div>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar_jawaban"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
                                         </div>
                                     </div>
                                 </div>

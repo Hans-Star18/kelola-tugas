@@ -30,3 +30,7 @@ horizontalExample.forEach(function (e) {
         suppressScrollY: true,
     });
 });
+
+$(".tombol-kumpulkan").on("click", function () {
+    $("#id_task").val($(this).data("id"));
+});

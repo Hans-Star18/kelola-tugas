@@ -3,6 +3,17 @@
 @section('content')
     <!-- Content -->
     <div class="container mt-4">
+        <div class="bs-toast toast toast-placement-ex bg-success top-0 start-0 fade {{ session()->has('success') ? 'show' : '' }} m-2"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-semibold">Notifikasi</div>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
         <div class="col-xl-12">
             <div class="nav-align-top mb-4">
                 <ul class="nav nav-tabs nav-fill" role="tablist">

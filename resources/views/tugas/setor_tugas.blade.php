@@ -13,8 +13,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $task->mata_pelajaran }}</h5>
                             <p class="card-text">{{ $task->judul_tugas }}</p>
-                            <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalCenter">Kumpulkan</a>
+                            <a href="" class="btn btn-primary tombol-kumpulkan" data-bs-toggle="modal"
+                                data-bs-target="#modalCenter" data-id={{ $task->id }}>Kumpulkan</a>
                         </div>
                         <div class="card-footer text-muted">{{ MyHelpers::strtodate($task->deadline_at)->diffForHumans() }}
                         </div>
