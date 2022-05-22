@@ -78,6 +78,7 @@ class TugasController extends Controller
     {
         return view('tugas.detail_tugas', [
             'task' => MyHelpers::tasks()->where('tasks.id', $id)->first(),
+            'answer' => Answer::where('id_task', $id)->first(),
         ]);
     }
 

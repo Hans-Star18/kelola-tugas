@@ -36,6 +36,56 @@
         <div class="card-body">
             <a href="/tugas" class="card-link">Kembali</a>
             <a href="javascript:void(0)" class="card-link">Download</a>
+            @if ($task->status_id == 1)
+                <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                    aria-controls="collapseExample" class="card-link">Jawaban</a>
+            @endif
+            <div class="collapse" id="collapseExample">
+                <div class="d-grid d-sm-flex p-2">
+                    <div class="col-md">
+                        <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
+                            <div class="accordion-item card">
+                                <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
+                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1">
+                                        Jawaban
+                                    </button>
+                                </h2>
+
+                                <div id="accordionIcon-1" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionIcon">
+                                    <div class="accordion-body">
+                                        @if ($answer->isi_jawaban === null)
+                                            <h5>Tidak Ada Jawaban Yang Tersedia</h5>
+                                        @else
+                                            {!! $answer->isi_jawaban !!}
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item card">
+                                <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
+                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2">
+                                        Komentar
+                                    </button>
+                                </h2>
+                                <div id="accordionIcon-2" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionIcon">
+                                    <div class="accordion-body">
+                                        @if ($answer->komentar === null)
+                                            <h5>Tidak Ada Komentar Yang Tersedia</h5>
+                                        @else
+                                            {{ $answer->komentar }}
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </div>
