@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_task')->unique();
-            $table->text('isi_jawaban');
-            $table->text('komentar');
+            $table->text('isi_jawaban')->nullable();
+            $table->text('komentar')->nullable();
             $table->timestamps();
         });
     }
