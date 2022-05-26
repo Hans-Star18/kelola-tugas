@@ -7,6 +7,7 @@ use App\Models\Answer;
 use App\Models\MataPelajaran;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TugasController extends Controller
 {
@@ -52,16 +53,33 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $semuaMedia = $request->allFiles();
+        $namaFile = [];
+        foreach ($semuaMedia as $media) {
+            $nama = Str::lower($media->hashName());
+
+            $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+            $nama = explode('.', $nama);
+            for ($i = 0; $i < count($extensions); $i++) {
+                if ($nama[1] == $extensions[$i]) {
+                    $uploadName = implode('.', $nama);
+                    $media->move('media', $uploadName);
+                    $namaFile[] = $uploadName;
+                };
+            }
+
+        }
+
         $validateData = $request->validate([
             'status_id' => 'required',
             'mata_pelajaran_id' => 'required',
             'judul_tugas' => 'required|max:255',
-            'deskripsi_tugas' => 'required',
+            'deskripsi_tugas' => '',
             'deadline_at' => 'required',
-            'tanggal_dibuat' => 'required',
-            'tanggal_dikumpul' => 'required',
+            'tanggal_dibuat' => '',
+            'tanggal_dikumpul' => '',
         ]);
+        $validateData['media_tugas'] = json_encode($namaFile);
 
         Task::create($validateData);
 
@@ -76,8 +94,14 @@ class TugasController extends Controller
      */
     public function show($id)
     {
+        if (request('content_type')) {
+            header("content-type: ", request('content_type'));
+            readfile('media/' . request('media') . '');
+        }
+
         return view('tugas.detail_tugas', [
             'task' => MyHelpers::tasks()->where('tasks.id', $id)->first(),
+            'answers' => Answer::All(),
             'answer' => Answer::where('id_task', $id)->first(),
         ]);
     }

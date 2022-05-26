@@ -34,3 +34,13 @@ horizontalExample.forEach(function (e) {
 $(".tombol-kumpulkan").on("click", function () {
     $("#id_task").val($(this).data("id"));
 });
+
+$(".tombol-multiple").on("click", function () {
+    let i = Math.ceil(Math.random() * 1000);
+    inputBaru = document.createElement("input");
+    inputBaru.setAttribute("type", "file");
+    inputBaru.setAttribute("id", "inputFile");
+    inputBaru.setAttribute("class", "form-control mb-1");
+    inputBaru.setAttribute("name", `media_tugas${i}`);
+    $("#inputMedia").append(inputBaru);
+});
