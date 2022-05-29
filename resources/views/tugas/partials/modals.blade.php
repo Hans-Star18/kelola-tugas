@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="modalCenterTitle">Setor Tugas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/tugas/setor" method="POST" class="form">
+            <form action="/tugas/setor" method="POST" class="form" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="col-md">
@@ -42,6 +42,34 @@
                                     <div class="accordion-body">
                                         <div>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item card">
+                                <h2 class="accordion-header text-body d-flex justify-content-between"
+                                    id="accordionIconTwo">
+                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3">
+                                        Media Tugas (png, jpg, jpeg, pdf)
+                                    </button>
+                                </h2>
+                                <div id="accordionIcon-3" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionIcon">
+                                    <div class="accordion-body">
+                                        <div class="row justify-content-between">
+                                            <div class="col">
+                                                <label for="inputFile" class="form-label"></label>
+                                            </div>
+                                            <div class="col">
+                                                <a href="javascript:void(0);" class="float-end tombol-multiple">
+                                                    <i class='bx bx-plus'></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-input-media" id="inputMedia">
+                                            <input class="form-control mb-1" type="file" id="inputFile"
+                                                name="media_tugas" />
                                         </div>
                                     </div>
                                 </div>

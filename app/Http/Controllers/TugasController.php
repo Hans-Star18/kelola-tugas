@@ -163,11 +163,29 @@ class TugasController extends Controller
     public function setor(Request $request)
     {
         //
+        $semuaMedia = $request->allFiles();
+        $namaFile = [];
+        foreach ($semuaMedia as $media) {
+            $nama = Str::lower($media->hashName());
+
+            $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+            $nama = explode('.', $nama);
+            for ($i = 0; $i < count($extensions); $i++) {
+                if ($nama[1] == $extensions[$i]) {
+                    $uploadName = implode('.', $nama);
+                    $media->move('media', $uploadName);
+                    $namaFile[] = $uploadName;
+                };
+            }
+
+        }
+
         $validateData = $request->validate([
-            'isi_jawaban' => 'required',
+            'isi_jawaban' => '',
             'id_task' => 'required',
             'komentar' => '',
         ]);
+        $validateData['media_jawaban'] = json_encode($namaFile);
 
         Answer::create($validateData);
         Task::where("id", $request->id_task)->update([
