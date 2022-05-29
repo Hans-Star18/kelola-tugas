@@ -12,7 +12,7 @@
     <div class="card ">
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 mb-4">
                     <h5 class="card-title">{{ $task->judul_tugas }}</h5>
                     <p class="card-text">{{ $task->deskripsi_tugas }}</p>
 
@@ -36,7 +36,7 @@
                     <div class="badge bg-secondary">{{ $task->mata_pelajaran }}</div>
                 </div>
                 @if ($task->media_tugas != null)
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mb-4">
                         <h5 class="card-title">Media Tugas</h5>
                         @foreach (json_decode($task->media_tugas) as $media)
                             @php
@@ -62,13 +62,13 @@
                     </div>
                 @endif
             </div>
-            <div class="mt-4">
+            <div class="">
                 <hr>
                 <a href="/tugas" class="card-link">Kembali</a>
-                <a href="javascript:void(0)" class="card-link">Download</a>
+                <a href="javascript:void(0)" class="card-link text-danger">Hapus</a>
                 @if ($task->status_id == 1)
                     <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                        aria-controls="collapseExample" class="card-link">Jawaban</a>
+                        aria-controls="collapseExample" class="card-link text-success">Jawaban</a>
                 @endif
             </div>
             <div class="collapse" id="collapseExample">
@@ -106,9 +106,48 @@
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
                                         @if ($answer === null || $answer->komentar === null)
-                                            <h5>Tidak Ada Komentar Yang Tersedia</h5>
+                                            <h5>Tidak Ada Media Yang Tersedia</h5>
                                         @else
                                             {{ $answer->komentar }}
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item card">
+                                <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
+                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3">
+                                        Media
+                                    </button>
+                                </h2>
+                                <div id="accordionIcon-3" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionIcon">
+                                    <div class="accordion-body">
+                                        @if ($answer === null || $answer->media_jawaban === [])
+                                            <h5>Tidak Ada Media Yang Tersedia</h5>
+                                        @else
+                                            @foreach (json_decode($answer->media_jawaban) as $media)
+                                                @php
+                                                    $namaMedia = explode('.', $media);
+                                                @endphp
+                                                @if ($namaMedia[1] == 'jpg' || $namaMedia[1] == 'jpeg')
+                                                    <a href="/tugas/{{ $task->id }}?content_type=image/jpeg&media={{ $media }}"
+                                                        class="d-block">
+                                                        Gambar
+                                                    </a>
+                                                @elseif($namaMedia[1] == 'png')
+                                                    <a href="/tugas/{{ $task->id }}?content_type=image/png&media={{ $media }}"
+                                                        class="d-block">
+                                                        Gambar
+                                                    </a>
+                                                @elseif ($namaMedia[1] == 'pdf')
+                                                    <a href="/tugas/{{ $task->id }}?content_type=application/pdf&media={{ $media }}"
+                                                        class="d-block">
+                                                        Dokumen
+                                                    </a>
+                                                @endif
+                                            @endforeach
                                         @endif
                                     </div>
                                 </div>

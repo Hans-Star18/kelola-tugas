@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_task')->unique();
             $table->text('isi_jawaban')->nullable();
             $table->text('komentar')->nullable();
+            $table->text('media_jawaban')->nullable();
             $table->timestamps();
         });
     }
