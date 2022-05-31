@@ -65,7 +65,8 @@
             <div class="">
                 <hr>
                 <a href="/tugas" class="card-link">Kembali</a>
-                <a href="javascript:void(0)" class="card-link text-danger">Hapus</a>
+                <a href="" class="card-link text-danger tombol-hapus" data-bs-toggle="modal" data-bs-target="#smallModal"
+                    data-id="{{ $task->id }}" data-konfirmasi="{{ $task->judul_tugas }}">Hapus</a>
                 @if ($task->status_id == 1)
                     <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                         aria-controls="collapseExample" class="card-link text-success">Jawaban</a>

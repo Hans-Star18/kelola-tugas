@@ -88,3 +88,29 @@
         </div>
     </div>
 </div>
+
+{{-- modal konfirmasi --}}
+<div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Hapus Tugas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="konfirmasi">Klik Hapus untuk menghapus tugas </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Batal
+                </button>
+                <form action="" method="POST" class="d-inline delete-button">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
