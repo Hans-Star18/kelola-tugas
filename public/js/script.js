@@ -44,3 +44,14 @@ $(".tombol-multiple").on("click", function () {
     inputBaru.setAttribute("name", `media_tugas${i}`);
     $("#inputMedia").append(inputBaru);
 });
+
+$(".tombol-hapus").on("click", function () {
+    let id = $(this).data("id");
+    $(".delete-button").attr("action", `/tugas/${id}`);
+    $(".konfirmasi").html(
+        "Klik <strong>Hapus</strong> untuk menghapus tugas <i>" +
+            $(this).data("konfirmasi") +
+            "</i>"
+    );
+    console.log($(".delete-button"));
+});
