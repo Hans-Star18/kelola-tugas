@@ -138,6 +138,12 @@ class TugasController extends Controller
     public function destroy($id, Task $task)
     {
         //
+        if ($task->find($id)->media_tugas) {
+            $media = json_decode($task->find($id)->media_tugas);
+            foreach ($media as $m) {
+                unlink('media/' . $m);
+            }
+        }
         Task::destroy($id);
         return redirect('/tugas')->with('success', 'Tugas Sudah Terhapus!!!');
     }
