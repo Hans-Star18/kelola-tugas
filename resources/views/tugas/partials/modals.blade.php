@@ -141,6 +141,7 @@
                     <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="gambar_lama" name="gambar_lama">
+                    <input type="hidden" id="gambar_dihapus" name="gambar_dihapus">
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="pilihMataPelajaran" class="form-label">Mata Pelajaran</label>
                         <select class="form-select" id="pilihMataPelajaran" aria-label="Default select example"
