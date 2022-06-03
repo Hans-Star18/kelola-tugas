@@ -127,8 +127,73 @@ class TugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
+        // mengambil nama gambar lama jika update dijalankan
         $gambarLama = collect(explode(',', $request->gambar_lama));
+
+        // validasi gambar dan mengambil nama gambar
+        $semuaMedia = $request->allFiles();
+        $namaFile = [];
+        foreach ($semuaMedia as $media) {
+            $nama = Str::lower($media->hashName());
+            $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+            $nama = explode('.', $nama);
+            for ($i = 0; $i < count($extensions); $i++) {
+                if ($nama[1] == $extensions[$i]) {
+                    $uploadName = implode('.', $nama);
+                    $media->move('media', $uploadName);
+                    $namaFile[] = $uploadName;
+                };
+            }
+        }
+
+        // validasi data request
+        $rules = [
+            'status_id' => 'required|boolean|digits:1|integer',
+            'mata_pelajaran_id' => 'required|integer|numeric',
+            'deadline_at' => 'required|date',
+            'judul_tugas' => 'required|max:255',
+        ];
+
+        // menjalankan validasi
+        $validateData = $request->validate($rules);
+
+        // menambahkan field tanggal
+        $validateData['tanggal_dibuat'] = $request->tanggal_dibuat;
+        $validateData['tanggal_dikumpul'] = $request->tanggal_dikumpul;
+
+        // catatan
+        $semuaMedia = $request->allFiles();
+        $namaFile = [];
+        foreach ($semuaMedia as $media) {
+            $nama = Str::lower($media->hashName());
+
+            $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+            $nama = explode('.', $nama);
+            for ($i = 0; $i < count($extensions); $i++) {
+                if ($nama[1] == $extensions[$i]) {
+                    $uploadName = implode('.', $nama);
+                    $media->move('media', $uploadName);
+                    $namaFile[] = $uploadName;
+                };
+            }
+
+        }
+
+        $validateData = $request->validate([
+            'status_id' => 'required',
+            'mata_pelajaran_id' => 'required',
+            'judul_tugas' => 'required|max:255',
+            'deskripsi_tugas' => '',
+            'deadline_at' => 'required',
+            'tanggal_dibuat' => '',
+            'tanggal_dikumpul' => '',
+        ]);
+        $validateData['media_tugas'] = json_encode($namaFile);
+
+        Task::create($validateData);
+
+        return redirect('/tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
     }
 
     /**
