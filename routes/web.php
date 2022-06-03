@@ -23,4 +23,5 @@ Route::get('/', [DashboardController::class, 'index']);
 
 Route::get('/tugas/setor', [TugasController::class, 'setor_tugas']);
 Route::post('/tugas/setor', [TugasController::class, 'setor']);
+Route::get('/tugas/get_data_tugas', [TugasController::class, 'get_data_tugas']);
 Route::resource('/tugas', TugasController::class);

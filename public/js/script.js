@@ -15,7 +15,6 @@ new Swiper(".card-slider", {
 
 const verticalExample = document.querySelectorAll(".vertical-example");
 verticalExample.forEach(function (e) {
-    console.log(e);
     const ps = new PerfectScrollbar(e, {
         wheelPropagation: true,
         suppressScrollX: true,
@@ -24,7 +23,6 @@ verticalExample.forEach(function (e) {
 
 const horizontalExample = document.querySelectorAll(".horizontal-example");
 horizontalExample.forEach(function (e) {
-    console.log(e);
     const ps = new PerfectScrollbar(e, {
         wheelPropagation: true,
         suppressScrollY: true,
@@ -37,12 +35,12 @@ $(".tombol-kumpulkan").on("click", function () {
 
 $(".tombol-multiple").on("click", function () {
     let i = Math.ceil(Math.random() * 1000);
-    inputBaru = document.createElement("input");
+    let inputBaru = document.createElement("input");
     inputBaru.setAttribute("type", "file");
     inputBaru.setAttribute("id", "inputFile");
     inputBaru.setAttribute("class", "form-control mb-1");
     inputBaru.setAttribute("name", `media_tugas${i}`);
-    $("#inputMedia").append(inputBaru);
+    $(inputBaru).appendTo(".form-input-media");
 });
 
 $(".tombol-hapus").on("click", function () {
@@ -53,5 +51,83 @@ $(".tombol-hapus").on("click", function () {
             $(this).data("konfirmasi") +
             "</i>"
     );
-    console.log($(".delete-button"));
+});
+
+$(function () {
+    $(".edit-button").on("click", function () {
+        const id = $(this).data("id");
+
+        $.ajax({
+            url: `/tugas/get_data_tugas`,
+            data: { id },
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                let i = Math.ceil(Math.random() * 1000);
+                let deadline = data.deadline_at.replace(" ", "T");
+                $("#create").val(data.tanggal_dibuat);
+                $("#update").val(data.tanggal_dikumpul);
+                $("#deadline").val(deadline);
+                $("#judulTugas").val(data.judul_tugas);
+                $("#deskripsiTugas").val(data.deskripsi_tugas);
+                $("." + data.mata_pelajaran).attr("selected", true);
+                if (data.media_tugas) {
+                    let mediaTugas = data.media_tugas.split(",");
+                    mediaTugas.forEach(function (e) {
+                        e = e.replace("[", "").replace("]", "");
+                        // Membuat elemen wadah
+                        let group = document.createElement("div");
+                        group.setAttribute("class", "input-group");
+                        // Membuat elemen input
+                        let previewFile = document.createElement("input");
+                        previewFile.setAttribute("type", "text");
+                        previewFile.setAttribute("id", "file");
+                        previewFile.setAttribute("class", "form-control mb-1");
+                        previewFile.setAttribute("readonly", true);
+                        previewFile.setAttribute("value", e);
+                        previewFile.setAttribute("name", `gambar_lama${i}`);
+                        // Membuat tombol Preview
+                        let tombolPreview = document.createElement("a");
+                        let extensi = e.split(".");
+                        extensi = extensi[1].replace('"', "");
+                        e = e.replace('"', "");
+                        if (extensi == "pdf") {
+                            tombolPreview.setAttribute(
+                                "href",
+                                `/tugas/${data.id}?content_type=application/pdf&media=${e}`
+                            );
+                        } else if (extensi == "png") {
+                            tombolPreview.setAttribute(
+                                "href",
+                                `/tugas/${data.id}?content_type=image/png&media=${e}`
+                            );
+                        } else {
+                            tombolPreview.setAttribute(
+                                "href",
+                                `/tugas/${data.id}?content_type=image/jpeg&media=${e}`
+                            );
+                        }
+
+                        tombolPreview.setAttribute("class", "btn btn-link");
+                        tombolPreview.textContent = "Preview";
+                        // Membuat tombol Hapus
+                        let tombolHapus = document.createElement("a");
+                        tombolHapus.setAttribute("class", "btn btn-link");
+                        tombolHapus.textContent = "Hapus";
+                        // Menambahkan elemen ke wadah
+                        group.append(previewFile);
+                        group.append(tombolPreview);
+                        group.append(tombolHapus);
+                        $(".form-media-lama").append(group);
+                        // jika tombol hapus di klik
+                        tombolHapus.onclick = function () {
+                            let i = Math.ceil(Math.random() * 10);
+                            group.setAttribute("id", `hapus${i}`);
+                            group.remove("#hapus" + i);
+                        };
+                    });
+                }
+            },
+        });
+    });
 });

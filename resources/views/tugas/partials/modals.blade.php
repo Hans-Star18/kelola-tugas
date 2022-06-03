@@ -114,3 +114,80 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="fullscreenModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFullTitle">Edit Tugas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/tugas" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="status-tugas mb-3">
+                        <div class="form-check">
+                            <input name="status_id" class="form-check-input" type="radio" value="0" id="radio1"
+                                checked />
+                            <label class="form-check-label" for="radio1"> Belum Selesai </label>
+                        </div>
+                        <div class="form-check">
+                            <input name="status_id" class="form-check-input" type="radio" value="1" id="radio2" />
+                            <label class="form-check-label" for="radio2"> Sudah Selesai </label>
+                        </div>
+                    </div>
+                    <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
+                    <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <label for="pilihMataPelajaran" class="form-label">Mata Pelajaran</label>
+                        <select class="form-select" id="pilihMataPelajaran" aria-label="Default select example"
+                            name="mata_pelajaran_id">
+                            <option>Pilih Mata Pelajaran</option>
+                            @foreach ($mataPelajaran as $MP)
+                                <option value="{{ $MP->id }}" class="{{ $MP->mata_pelajaran }}">
+                                    {{ $MP->mata_pelajaran }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <label for="deadline" class="form-label">Tanggal Dikumpul</label>
+                        <input class="form-control" value="2022-04-16T20:38:06" type="datetime-local" id="deadline"
+                            name="deadline_at" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="judulTugas" class="form-label">Judul Tugas</label>
+                        <input type="text" class="form-control" id="judulTugas" placeholder="Tugas Integral"
+                            name="judul_tugas" />
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label for="deskripsiTugas" class="form-label">Deskripsi Tugas</label>
+                        <textarea class="form-control" id="deskripsiTugas" rows="3" name="deskripsi_tugas"
+                            placeholder="Kerjakan tugas integral yang ada di halaman 25 di kertas lempiran."></textarea>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <label for="inputFile" class="form-label">Upload Tugas (png, jpg, jpeg,
+                                    pdf)</label>
+                            </div>
+                            <div class="col">
+                                <a href="javascript:void(0);" class="float-end tombol-multiple">
+                                    <i class='bx bx-plus'></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-input-media" id="inputMedia">
+                            <input class="form-control mb-1" type="file" id="inputFile" name="media_tugas" />
+                        </div>
+                        <div class="form-media-lama">
+
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -103,6 +103,7 @@ class TugasController extends Controller
             'task' => MyHelpers::tasks()->where('tasks.id', $id)->first(),
             'answers' => Answer::All(),
             'answer' => Answer::where('id_task', $id)->first(),
+            'mataPelajaran' => MataPelajaran::All(),
         ]);
     }
 
@@ -159,6 +160,7 @@ class TugasController extends Controller
         return view('tugas.setor_tugas', [
             'title' => 'Setor Tugas',
             'tasks' => MyHelpers::tasks()->get()->where('status_id', 0),
+            'mataPelajaran' => MataPelajaran::All(),
         ]);
     }
 
@@ -201,5 +203,15 @@ class TugasController extends Controller
         ]);
 
         return redirect('/tugas')->with('success', 'Tugas Sudah Terkumpul!!!');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get_data_tugas()
+    {
+        echo json_encode(MyHelpers::tasks()->get()->where('id', request('id'))->first());
     }
 }

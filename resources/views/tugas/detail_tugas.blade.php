@@ -13,7 +13,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6 mb-4">
-                    <h5 class="card-title">{{ $task->judul_tugas }}</h5>
+                    <h5 class="card-title">{{ $task->judul_tugas }}
+                        @if ($task->status_id == 0)
+                            <a href='' class="edit-button" data-bs-toggle="modal" data-bs-target="#fullscreenModal"
+                                data-id="{{ $task->id }}"><i class='bx bx-edit'></i></a>
+                        @endif
+                    </h5>
                     <p class="card-text">{{ $task->deskripsi_tugas }}</p>
 
                     @if ($task->status_id == 0 && MyHelpers::strtodate($task->deadline_at)->diff()->invert == 1)
@@ -161,3 +166,4 @@
     </div>
     </div>
 @endsection
+@include('tugas.partials.modals')

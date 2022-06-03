@@ -94,8 +94,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-    @include('tugas.partials.modals')
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="/vendor/libs/swiper/swiper-bundle.min.js"></script>
