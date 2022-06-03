@@ -126,6 +126,7 @@
             <div class="modal-body">
                 <form action="/tugas" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="status-tugas mb-3">
                         <div class="form-check">
                             <input name="status_id" class="form-check-input" type="radio" value="0" id="radio1"
@@ -139,6 +140,7 @@
                     </div>
                     <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
+                    <input type="hidden" id="gambar_lama" name="gambar_lama">
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="pilihMataPelajaran" class="form-label">Mata Pelajaran</label>
                         <select class="form-select" id="pilihMataPelajaran" aria-label="Default select example"
@@ -153,8 +155,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="deadline" class="form-label">Tanggal Dikumpul</label>
-                        <input class="form-control" value="2022-04-16T20:38:06" type="datetime-local" id="deadline"
-                            name="deadline_at" />
+                        <input class="form-control" type="datetime-local" id="deadline" name="deadline_at" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="judulTugas" class="form-label">Judul Tugas</label>
@@ -185,7 +186,7 @@
 
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Edit</button>
+                    <button class="btn btn-primary tombol-edit" type="submit">Edit</button>
                 </form>
             </div>
         </div>

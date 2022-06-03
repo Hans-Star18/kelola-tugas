@@ -56,6 +56,7 @@ $(".tombol-hapus").on("click", function () {
 $(function () {
     $(".edit-button").on("click", function () {
         const id = $(this).data("id");
+        $(".modal-body form").attr("action", `/tugas/${id}`);
 
         $.ajax({
             url: `/tugas/get_data_tugas`,
@@ -73,8 +74,12 @@ $(function () {
                 $("." + data.mata_pelajaran).attr("selected", true);
                 if (data.media_tugas) {
                     let mediaTugas = data.media_tugas.split(",");
+                    let gambar_lama = [];
                     mediaTugas.forEach(function (e) {
                         e = e.replace("[", "").replace("]", "");
+                        e = e.replace('"', "");
+                        e = e.replace('"', "");
+                        gambar_lama.push(e);
                         // Membuat elemen wadah
                         let group = document.createElement("div");
                         group.setAttribute("class", "input-group");
@@ -85,12 +90,10 @@ $(function () {
                         previewFile.setAttribute("class", "form-control mb-1");
                         previewFile.setAttribute("readonly", true);
                         previewFile.setAttribute("value", e);
-                        previewFile.setAttribute("name", `gambar_lama${i}`);
                         // Membuat tombol Preview
                         let tombolPreview = document.createElement("a");
                         let extensi = e.split(".");
                         extensi = extensi[1].replace('"', "");
-                        e = e.replace('"', "");
                         if (extensi == "pdf") {
                             tombolPreview.setAttribute(
                                 "href",
@@ -126,6 +129,7 @@ $(function () {
                             group.remove("#hapus" + i);
                         };
                     });
+                    $("#gambar_lama").val(gambar_lama);
                 }
             },
         });

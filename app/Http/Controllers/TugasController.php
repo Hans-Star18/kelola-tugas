@@ -122,12 +122,13 @@ class TugasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
+        $gambarLama = collect(explode(',', $request->gambar_lama));
     }
 
     /**
