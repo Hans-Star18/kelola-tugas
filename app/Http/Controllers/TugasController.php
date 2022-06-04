@@ -19,11 +19,22 @@ class TugasController extends Controller
 
     public function index()
     {
+        // mengambil data tugas dari helper dan memasukan ke variable $tugas
         $tasks = MyHelpers::tasks();
+
+        /*
+        mengecek jika ada request get dangan nama mata_pelajaran
+        maka data tugas akan di tampilkan berdasarkan mata pelajaran yang dipilih
+         */
         if (request('mata_pelajaran')) {
+            // mengambil data tugas berdasarkan mata pelajaran yang dipilih
             $tasks = $tasks->where('mata_pelajaran', request('mata_pelajaran'));
         }
 
+        /*
+        mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama semua_tugas.blade.php
+        dan mengirimkan data yang diperlukan ke view
+         */
         return view('tugas.semua_tugas', [
             'title' => 'Semua Tugas',
             'tasks' => $tasks->get(),
@@ -38,7 +49,10 @@ class TugasController extends Controller
      */
     public function create()
     {
-        //
+        /*
+        mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama tugas_baru.blade.php
+        dan mengirimkan data yang diperlukan ke view
+         */
         return view('tugas.tugas_baru', [
             'title' => 'Tambah Tugas Baru',
             'mataPelajaran' => MataPelajaran::All(),
@@ -53,17 +67,44 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
+        // mengambil semua request dengan type=file dan memasukan ke variable $semuaMedia
         $semuaMedia = $request->allFiles();
+
+        // membuat wadah yang akan digunakan untuk menampung semua nama file dari request dengan type=file
         $namaFile = [];
+
+        // mengeluarkan semua media yang ada di variable $semuaMedia dari collection
         foreach ($semuaMedia as $media) {
+            /*
+            mengambil nama dari file yang sudah dikeluarkan dan mengenkripsinya
+            kemuadian memasukannya ke dalam variable $nama
+             */
             $nama = Str::lower($media->hashName());
 
+            // membuat variable yang diperuntukan untuk validasi
             $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+
+            /*
+            memecah $nama jika di dalam string terdapat tanda . (tanda titik)
+            makan string akan menjadi 2 dan disimpan dalam bentuk array di variable $nama
+            array dengan $nama[0] akan menjadi nama, dan array dengan $nama[1] akan menjadi ekstensi
+             */
             $nama = explode('.', $nama);
+
+            // membuat pengulangan for untuk melakukan validasi
             for ($i = 0; $i < count($extensions); $i++) {
+                // jika ekstensi yang di ambil dari $nama[1] sama dengan ekstensi yang ada di $extensions
                 if ($nama[1] == $extensions[$i]) {
+                    /*
+                    maka gabungakan lagi variable $nama[0] dengan $nama[1]
+                    dengan tanda titik sebagai penghubung dan simpan dalam variable $uploadName
+                     */
                     $uploadName = implode('.', $nama);
+
+                    // memindahkan file yang sudah di upload ke folder public/media dengan nama yang ada di variable $uploadName
                     $media->move('media', $uploadName);
+
+                    // menambahkan nama file yang sudah di upload ke dalam array $namaFile
                     $namaFile[] = $uploadName;
                 };
             }
