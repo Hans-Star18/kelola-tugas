@@ -71,7 +71,10 @@ $(function () {
                 $("#deadline").val(deadline);
                 $("#judulTugas").val(data.judul_tugas);
                 $("#deskripsiTugas").val(data.deskripsi_tugas);
-                $("." + data.mata_pelajaran).attr("selected", true);
+                $("." + data.mata_pelajaran.replace(" ", "-")).attr(
+                    "selected",
+                    true
+                );
                 if (data.media_tugas) {
                     let mediaTugas = data.media_tugas.split(",");
                     let gambar_lama = [];

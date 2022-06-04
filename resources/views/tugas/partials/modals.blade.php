@@ -148,7 +148,8 @@
                             name="mata_pelajaran_id">
                             <option>Pilih Mata Pelajaran</option>
                             @foreach ($mataPelajaran as $MP)
-                                <option value="{{ $MP->id }}" class="{{ $MP->mata_pelajaran }}">
+                                <option value="{{ $MP->id }}"
+                                    class="{{ str_replace(' ', '-', $MP->mata_pelajaran) }}">
                                     {{ $MP->mata_pelajaran }}
                                 </option>
                             @endforeach
