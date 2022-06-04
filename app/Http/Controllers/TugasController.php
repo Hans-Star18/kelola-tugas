@@ -150,7 +150,7 @@ class TugasController extends Controller
         $validateData['tanggal_dikumpul'] = now();
         $validateData['media_tugas'] = json_encode($namaFile);
 
-        // menyimpan data ke dalam databasea
+        // menyimpan data ke dalam database
         Task::create($validateData);
 
         // menampilkan pesan sukses dan mengarahkan ke halaman yang dituju
