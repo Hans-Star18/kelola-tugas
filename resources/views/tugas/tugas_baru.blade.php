@@ -32,21 +32,37 @@
                                 <option value="{{ $MP->id }}">{{ $MP->mata_pelajaran }}</option>
                             @endforeach
                         </select>
+                        @error('mata_pelajaran_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="deadline" class="form-label">Tanggal Dikumpul</label>
                         <input class="form-control @error('deadline_at') is-invalid @enderror" type="datetime-local"
-                            id="deadline" name="deadline_at" />
+                            id="deadline" name="deadline_at" value="{{ old('deadline_at') }}" />
+                        @error('deadline_at')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="judulTugas" class="form-label">Judul Tugas</label>
                         <input type="text" class="form-control @error('judul_tugas') is-invalid @enderror" id="judulTugas"
-                            placeholder="Tugas Integral" name="judul_tugas" />
+                            placeholder="Tugas Integral" name="judul_tugas" value="{{ old('judul_tugas') }}" />
+                        @error('judul_tugas')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="deskripsiTugas" class="form-label">Deskripsi Tugas</label>
                         <textarea class="form-control" id="deskripsiTugas" rows="3" name="deskripsi_tugas"
                             placeholder="Kerjakan tugas integral yang ada di halaman 25 di kertas lempiran."></textarea>
+
                     </div>
                     <div class="col-lg-6 mb-3">
                         <div class="row justify-content-between">
@@ -62,6 +78,11 @@
                         <div class="form-input-media" id="inputMedia">
                             <input class="form-control {{ session('error') ? 'is-invalid' : '' }} mb-1" type="file"
                                 id="inputFile" name="media_tugas" />
+                            @if (session('error'))
+                                <div class="invalid-feedback">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Tambah</button>

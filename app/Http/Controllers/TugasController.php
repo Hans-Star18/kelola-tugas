@@ -223,7 +223,7 @@ class TugasController extends Controller
             'status_id' => 'required|boolean|integer',
             'mata_pelajaran_id' => 'required|integer|numeric',
             'deadline_at' => 'required|date',
-            'judul_tugas' => 'required|max:255',
+            'judul_tugas' => 'required|max:255|string',
         ];
 
         // menjalankan validasi

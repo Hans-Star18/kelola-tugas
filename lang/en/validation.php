@@ -11,7 +11,7 @@ return [
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
     |
-    */
+     */
 
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
@@ -145,11 +145,22 @@ return [
     | convention "attribute.rule" to name the lines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
-    */
+     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'mata_pelajaran_id' => [
+            'integer' => 'Pilih salah satu mata pelajaran.',
+            'required' => 'Pilih salah satu mata pelajaran.',
+            'numeric' => 'Pilih salah satu mata pelajaran.',
+        ],
+        'deadline_at' => [
+            'required' => 'Masukkan tanggal deadline.',
+            'date' => 'Masukkan tanggal deadline.',
+        ],
+        'judul_tugas' => [
+            'required' => 'Masukkan judul tugas.',
+            'string' => 'Masukkan judul tugas.',
+            'max' => 'Judul tugas maksimal 255 karakter.',
         ],
     ],
 
@@ -162,7 +173,7 @@ return [
     | with something more reader friendly such as "E-Mail Address" instead
     | of "email". This simply helps us make our message more expressive.
     |
-    */
+     */
 
     'attributes' => [],
 
