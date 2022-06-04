@@ -91,39 +91,69 @@ class TugasController extends Controller
              */
             $nama = explode('.', $nama);
 
-            // membuat pengulangan for untuk melakukan validasi
-            for ($i = 0; $i < count($extensions); $i++) {
-                // jika ekstensi yang di ambil dari $nama[1] sama dengan ekstensi yang ada di $extensions
-                if ($nama[1] == $extensions[$i]) {
-                    /*
-                    maka gabungakan lagi variable $nama[0] dengan $nama[1]
-                    dengan tanda titik sebagai penghubung dan simpan dalam variable $uploadName
-                     */
-                    $uploadName = implode('.', $nama);
+            // jika ekstensi yang di ambil dari $nama[1] sama dengan ekstensi yang ada di $extensions
+            if ($nama[1] == $extensions[0] || $nama[1] == $extensions[1] || $nama[1] == $extensions[2] || $nama[1] == $extensions[3]) {
+                /*
+                maka gabungakan lagi variable $nama[0] dengan $nama[1]
+                dengan tanda titik sebagai penghubung dan simpan dalam variable $uploadName
+                 */
+                $uploadName = implode('.', $nama);
 
-                    // memindahkan file yang sudah di upload ke folder public/media dengan nama yang ada di variable $uploadName
-                    $media->move('media', $uploadName);
+                // memindahkan file yang sudah di upload ke folder public/media dengan nama yang ada di variable $uploadName
+                $media->move('media', $uploadName);
 
-                    // menambahkan nama file yang sudah di upload ke dalam array $namaFile
-                    $namaFile[] = $uploadName;
-                };
+                // menambahkan nama file yang sudah di upload ke dalam array $namaFile
+                $namaFile[] = $uploadName;
+            } else {
+                // mengambil nama original untuk menampilkan pesan error
+                $nama_ori = $media->getClientOriginalName();
+
+                // jika tidak sama dengan ekstensi yang ada di $extensions
+                // maka akan menampilkan pesan error
+                session()->flash('error', 'Ekstensi file ' . $nama_ori . ' tidak sesuai, file yang diperbolehkan hanya ' . implode(', ', $extensions));
             }
-
         }
 
-        $validateData = $request->validate([
-            'status_id' => 'required',
-            'mata_pelajaran_id' => 'required',
-            'judul_tugas' => 'required|max:255',
-            'deskripsi_tugas' => '',
-            'deadline_at' => 'required',
-            'tanggal_dibuat' => '',
-            'tanggal_dikumpul' => '',
-        ]);
+        if (session('error')) {
+            // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
+            $rules = [
+                'status_id' => 'required|integer|numeric',
+                'mata_pelajaran_id' => 'required|integer|numeric',
+                'judul_tugas' => 'required|max:255|string',
+                'deadline_at' => 'required|date',
+            ];
+
+            // menjalankan validasi
+            $validateData = $request->validate($rules);
+
+            foreach ($namaFile as $nf) {
+                unlink('media/' . $nf);
+            }
+
+            return redirect()->back();
+        }
+
+        // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
+        $rules = [
+            'status_id' => 'required|integer|numeric',
+            'mata_pelajaran_id' => 'required|integer|numeric',
+            'judul_tugas' => 'required|max:255|string',
+            'deadline_at' => 'required|date',
+        ];
+
+        // menjalankan validasi
+        $validateData = $request->validate($rules);
+
+        // menambahkan data lainnya yang tidak perlu di validasi
+        $validateData['deskripsi_tugas'] = $request->deskripsi_tugas;
+        $validateData['tanggal_dibuat'] = now();
+        $validateData['tanggal_dikumpul'] = now();
         $validateData['media_tugas'] = json_encode($namaFile);
 
+        // menyimpan data ke dalam database
         Task::create($validateData);
 
+        // menampilkan pesan sukses dan mengarahkan ke halaman yang dituju
         return redirect('/tugas/create')->with('success', 'Tugas baru sudah dibuat!!!');
     }
 
@@ -190,7 +220,7 @@ class TugasController extends Controller
 
         // validasi data request
         $rules = [
-            'status_id' => 'required|boolean|digits:1|integer',
+            'status_id' => 'required|boolean|integer',
             'mata_pelajaran_id' => 'required|integer|numeric',
             'deadline_at' => 'required|date',
             'judul_tugas' => 'required|max:255',
