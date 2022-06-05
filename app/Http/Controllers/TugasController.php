@@ -297,8 +297,6 @@ class TugasController extends Controller
         return redirect('/tugas/create')->with('success', 'Tugas berhasil ditambahkan.');
     }
 
-    }
-
     /**
      * Remove the specified resource from storage.
      *
