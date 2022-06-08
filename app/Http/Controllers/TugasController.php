@@ -79,7 +79,7 @@ class TugasController extends Controller
             mengambil nama dari file yang sudah dikeluarkan dan mengenkripsinya
             kemuadian memasukannya ke dalam variable $nama
              */
-            $nama = Str::lower($media->getClientOriginalName() . '_' . mt_rand(1, 100));
+            $nama = Str::lower(mt_rand(1, 1000) . '_' . $media->getClientOriginalName());
 
             // membuat variable yang diperuntukan untuk validasi
             $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
@@ -203,15 +203,11 @@ class TugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
-        // mengambil nama gambar lama jika update dijalankan
-        $gambarLama = collect(explode(',', $request->gambar_lama));
+        // membuat wadah yang akan digunakan untuk menampung semua nama file dari request dengan type=file
+        $namaFile = [];
 
         // mengambil semua request dengan type=file dan memasukan ke variable $semuaMedia
         $semuaMedia = $request->allFiles();
-
-        // membuat wadah yang akan digunakan untuk menampung semua nama file dari request dengan type=file
-        $namaFile = [];
 
         // mengeluarkan semua media yang ada di variable $semuaMedia dari collection
         foreach ($semuaMedia as $media) {
@@ -219,7 +215,7 @@ class TugasController extends Controller
             mengambil nama dari file yang sudah dikeluarkan dan mengenkripsinya
             kemuadian memasukannya ke dalam variable $nama
              */
-            $nama = Str::lower($media->hashName());
+            $nama = Str::lower(mt_rand(1, 1000) . '_' . $media->getClientOriginalName());
 
             // membuat variable yang diperuntukan untuk validasi
             $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
@@ -273,6 +269,30 @@ class TugasController extends Controller
             return redirect()->back();
         }
 
+        // membuat pengkondisian jika ada gambar lama
+        if ($request->gambar_lama) {
+            // mengambil nama gambar lama jika update dijalankan
+            $gambarLama = collect(explode(',', $request->gambar_lama));
+
+            // mengeluarkan semua nama gambar lama dari variable $gambarLama
+            foreach ($gambarLama as $gl) {
+                // memasukan semua gambar lama ke dalam array $namaFile
+                $namaFile[] = $gl;
+            }
+        }
+
+        // membuat pengkondisian jika ada gambar yang dihapus
+        if ($request->gambar_hapus) {
+            // mengambil nama gambar jika ada yang dihapus
+            $gambarDihapus = collect(explode(',', $request->gambar_dihapus));
+
+            // mengeluarkan semua nama gambar yang dihapus dari variable $gambarDihapus
+            foreach ($gambarDihapus as $gd) {
+                // menghapus gambar yang dihapus dari folder media
+                unlink('media/' . $gd);
+            }
+        }
+
         // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
         $rules = [
             'status_id' => 'required|integer|numeric',
@@ -291,10 +311,10 @@ class TugasController extends Controller
         $validateData['media_tugas'] = json_encode($namaFile);
 
         // menyimpan data ke dalam database
-        Task::create($validateData);
+        Task::where('id', $id)->update($validateData);
 
         // menampilkan pesan sukses dan mengarahkan ke halaman yang dituju
-        return redirect('/tugas/create')->with('success', 'Tugas berhasil ditambahkan.');
+        return redirect('/tugas' . '/' . $id)->with('success', 'Tugas Sudah Diubah.');
     }
 
     /**

@@ -9,7 +9,26 @@
                 <div class="mt-5 col-lg-8 shadow-none bg-transparent border border-success rounded">
     @endif
 
+    <div class="bs-toast toast toast-placement-ex bg-success top-0 start-0 fade {{ session()->has('success') ? 'show' : '' }} m-2"
+        role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Notifikasi</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ session('success') }}
+        </div>
+    </div>
+
     <div class="card ">
+        @if (session('errors') || session('error'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                Tugas gagal di edit — <a href='' class="edit-button" data-bs-toggle="modal"
+                    data-bs-target="#fullscreenModal" data-id="{{ $task->id }}">Cek error!</a>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6 mb-4">
@@ -40,27 +59,29 @@
                     <br>
                     <div class="badge bg-secondary">{{ $task->mata_pelajaran }}</div>
                 </div>
-                @if ($task->media_tugas != null)
+                @if ($task->media_tugas)
                     <div class="col-lg-6 mb-4">
                         <h5 class="card-title">Media Tugas</h5>
                         @foreach (json_decode($task->media_tugas) as $media)
                             @php
                                 $namaMedia = explode('.', $media);
+                                $namaAsli = explode('_', $media);
                             @endphp
+
                             @if ($namaMedia[1] == 'jpg' || $namaMedia[1] == 'jpeg')
                                 <a href="/tugas/{{ $task->id }}?content_type=image/jpeg&media={{ $media }}"
                                     class="d-block">
-                                    Gambar
+                                    {{ $namaAsli[1] }}
                                 </a>
                             @elseif($namaMedia[1] == 'png')
                                 <a href="/tugas/{{ $task->id }}?content_type=image/png&media={{ $media }}"
                                     class="d-block">
-                                    Gambar
+                                    {{ $namaAsli[1] }}
                                 </a>
                             @elseif ($namaMedia[1] == 'pdf')
                                 <a href="/tugas/{{ $task->id }}?content_type=application/pdf&media={{ $media }}"
                                     class="d-block">
-                                    Dokumen
+                                    {{ $namaAsli[1] }}
                                 </a>
                             @endif
                         @endforeach
