@@ -79,7 +79,7 @@ class TugasController extends Controller
             mengambil nama dari file yang sudah dikeluarkan dan mengenkripsinya
             kemuadian memasukannya ke dalam variable $nama
              */
-            $nama = Str::lower($media->hashName());
+            $nama = Str::lower($media->getClientOriginalName() . '_' . mt_rand(1, 100));
 
             // membuat variable yang diperuntukan untuk validasi
             $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
