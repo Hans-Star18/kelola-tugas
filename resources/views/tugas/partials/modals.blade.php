@@ -141,26 +141,46 @@
                     <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="gambar_lama" name="gambar_lama">
+                    <input type="hidden" id="gambar_dihapus" name="gambar_dihapus">
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="pilihMataPelajaran" class="form-label">Mata Pelajaran</label>
-                        <select class="form-select" id="pilihMataPelajaran" aria-label="Default select example"
-                            name="mata_pelajaran_id">
+                        <select class="form-select  @error('mata_pelajaran_id') is-invalid @enderror"
+                            id="pilihMataPelajaran" aria-label="Default select example" name="mata_pelajaran_id">
                             <option>Pilih Mata Pelajaran</option>
                             @foreach ($mataPelajaran as $MP)
-                                <option value="{{ $MP->id }}" class="{{ $MP->mata_pelajaran }}">
+                                <option value="{{ $MP->id }}"
+                                    class="{{ str_replace(' ', '-', $MP->mata_pelajaran) }}">
                                     {{ $MP->mata_pelajaran }}
                                 </option>
                             @endforeach
                         </select>
+                        @error('mata_pelajaran_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-3 col-md-6 mb-3">
-                        <label for="deadline" class="form-label">Tanggal Dikumpul</label>
-                        <input class="form-control" type="datetime-local" id="deadline" name="deadline_at" />
+                        <label for="deadline" class="form-label ">Tanggal
+                            Dikumpul</label>
+                        <input class="form-control @error('deadline_at') is-invalid @enderror" type="datetime-local"
+                            id="deadline" name="deadline_at" value="{{ old('deadline_at') }}" />
+                        @error('deadline_at')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="judulTugas" class="form-label">Judul Tugas</label>
-                        <input type="text" class="form-control" id="judulTugas" placeholder="Tugas Integral"
-                            name="judul_tugas" />
+                        <input type="text" class="form-control @error('judul_tugas') is-invalid @enderror"
+                            id="judulTugas" placeholder="Tugas Integral" name="judul_tugas"
+                            value="{{ old('judul_tugas') }}" />
+                        @error('judul_tugas')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="deskripsiTugas" class="form-label">Deskripsi Tugas</label>
@@ -180,7 +200,13 @@
                             </div>
                         </div>
                         <div class="form-input-media" id="inputMedia">
-                            <input class="form-control mb-1" type="file" id="inputFile" name="media_tugas" />
+                            <input class="form-control mb-1 {{ session('error') ? 'is-invalid' : '' }}" type="file"
+                                id="inputFile" name="media_tugas" />
+                            @if (session('error'))
+                                <div class="invalid-feedback">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-media-lama">
 

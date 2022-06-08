@@ -71,10 +71,14 @@ $(function () {
                 $("#deadline").val(deadline);
                 $("#judulTugas").val(data.judul_tugas);
                 $("#deskripsiTugas").val(data.deskripsi_tugas);
-                $("." + data.mata_pelajaran).attr("selected", true);
+                $("." + data.mata_pelajaran.replace(" ", "-")).attr(
+                    "selected",
+                    true
+                );
                 if (data.media_tugas) {
                     let mediaTugas = data.media_tugas.split(",");
                     let gambar_lama = [];
+                    let gambar_dihapus = [];
                     mediaTugas.forEach(function (e) {
                         e = e.replace("[", "").replace("]", "");
                         e = e.replace('"', "");
@@ -82,6 +86,7 @@ $(function () {
                         gambar_lama.push(e);
                         // Membuat elemen wadah
                         let group = document.createElement("div");
+                        group.setAttribute("class", "input-group");
                         group.setAttribute("class", "input-group");
                         // Membuat elemen input
                         let previewFile = document.createElement("input");
@@ -126,7 +131,16 @@ $(function () {
                         tombolHapus.onclick = function () {
                             let i = Math.ceil(Math.random() * 10);
                             group.setAttribute("id", `hapus${i}`);
+                            gambar_lama.splice(
+                                gambar_lama.indexOf(group.children[0].value),
+                                1
+                            );
+                            gambar_dihapus.push(group.children[0].value);
+                            console.log(gambar_dihapus);
+                            console.log(gambar_lama);
                             group.remove("#hapus" + i);
+                            $("#gambar_lama").val(gambar_lama);
+                            $("#gambar_dihapus").val(gambar_dihapus);
                         };
                     });
                     $("#gambar_lama").val(gambar_lama);
