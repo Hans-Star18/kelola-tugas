@@ -22,7 +22,7 @@
                                     <p class="card-text">
                                         {{ $TMI->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $TMI->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $TMI->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                     <p class="card-text">
                                         {{ $task->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                     <p class="card-text">
                                         {{ $BSMI->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $BSMI->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $BSMI->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     <p class="card-text">
                                         {{ $task->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                     <p class="card-text">
                                         {{ $SSMI->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $SSMI->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $SSMI->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                                     <p class="card-text">
                                         {{ $task->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                     <p class="card-text">
                                         {{ $TMI->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $TMI->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $TMI->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                                     <p class="card-text">
                                         {{ $TLWMI->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $TLWMI->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $TLWMI->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                                     <p class="card-text">
                                         {{ $task->deskripsi_tugas }}
                                     </p>
-                                    <a href="/semua_tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
+                                    <a href="/tugas/{{ $task->id }}" class="card-link">Lebih Detail</a>
                                 </div>
                             </div>
                         </div>
