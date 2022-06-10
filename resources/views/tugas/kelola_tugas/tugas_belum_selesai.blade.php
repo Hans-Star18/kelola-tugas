@@ -1,6 +1,6 @@
 <div class="card overflow-hidden">
     <h5 class="ms-3 mt-3 mb-2">Tugas Belum Selesai</h5>
-    <div class="btn-group col-lg-2 col-md-4 col-sm-4 com-xs-4 mx-3">
+    <div class="btn-group col-lg-2 col-md-4 col-sm-6 com-xs-6 mx-3">
         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             @if (request('mata_pelajaran'))
@@ -9,7 +9,7 @@
                 Semua
             @endif
         </button>
-        <ul class="dropdown-menu vertical-example" style="max-height: 200px;">
+        <ul class="dropdown-menu vertical-example " style="max-height: 200px;">
             <li>
                 <a class="dropdown-item" href="tugas">
                     Semua

@@ -262,10 +262,13 @@ class TugasController extends Controller
             // menjalankan validasi
             $validateData = $request->validate($rules);
 
+            // mengambil nama file yang sudah di upload
             foreach ($namaFile as $nf) {
+                // menghapus file yang sudah di upload
                 unlink('media/' . $nf);
             }
 
+            // mengarahkan halaman untuk kembali
             return redirect()->back();
         }
 
@@ -323,17 +326,44 @@ class TugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Task $task)
+    public function destroy($id, Task $task, Answer $answer)
     {
-        //
+        // mengecek apakan tugas yang akan di hapus memiliki media
         if ($task->find($id)->media_tugas) {
+            // jika memiliki, extract media mejadi array
             $media = json_decode($task->find($id)->media_tugas);
+
+            // mengeluarkan media yang ada di dalam araay
             foreach ($media as $m) {
+                // menghapus file yang ada di folder media
                 unlink('media/' . $m);
             }
         }
+
+        // mengecek apakan ada jawaban
+        if ($answer->get()->where('id_task', $id)) {
+            // memilih column media_jawaban dari tabel jawaban
+            $answer->get()->where('id_task', $id)->each(function ($item) {
+                // jika memiliki, extract media mejadi array
+                $media = json_decode($item->media_jawaban);
+
+                // mengeluarkan media yang ada di dalam araay
+                foreach ($media as $m) {
+                    // menghapus file yang ada di folder media
+                    unlink('media/' . $m);
+                }
+
+                // menghapus jawaban yang ada di dalam database
+                Answer::destroy($item->id);
+            });
+
+        }
+
+        // menghapus tugas yang ada di database
         Task::destroy($id);
-        return redirect('/tugas')->with('success', 'Tugas Sudah Terhapus!!!');
+
+        // menampilkan pesan sukses dan mengarahkan ke halaman yang dituju
+        return redirect('/tugas')->with('success', 'Tugas Sudah Dihapus.');
     }
 
     /**
@@ -343,7 +373,10 @@ class TugasController extends Controller
      */
     public function setor_tugas()
     {
-        //
+        /*
+        mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama setor_tugas.blade.php
+        dan mengirimkan data yang diperlukan ke view
+         */
         return view('tugas.setor_tugas', [
             'title' => 'Setor Tugas',
             'tasks' => MyHelpers::tasks()->get()->where('status_id', 0),
@@ -359,22 +392,73 @@ class TugasController extends Controller
      */
     public function setor(Request $request)
     {
-        //
+        // mengambil semua request dengan type=file dan memasukan ke variable $semuaMedia
         $semuaMedia = $request->allFiles();
-        $namaFile = [];
-        foreach ($semuaMedia as $media) {
-            $nama = Str::lower($media->hashName());
 
+        // membuat wadah yang akan digunakan untuk menampung semua nama file dari request dengan type=file
+        $namaFile = [];
+
+        // mengeluarkan semua media yang ada di variable $semuaMedia dari collection
+        foreach ($semuaMedia as $media) {
+            /*
+            mengambil nama dari file yang sudah dikeluarkan dan mengenkripsinya
+            kemuadian memasukannya ke dalam variable $nama
+             */
+            $nama = Str::lower(mt_rand(1, 1000) . '_' . $media->getClientOriginalName());
+
+            // membuat variable yang diperuntukan untuk validasi
             $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
+
+            /*
+            memecah $nama jika di dalam string terdapat tanda . (tanda titik)
+            makan string akan menjadi 2 dan disimpan dalam bentuk array di variable $nama
+            array dengan $nama[0] akan menjadi nama, dan array dengan $nama[1] akan menjadi ekstensi
+             */
             $nama = explode('.', $nama);
-            for ($i = 0; $i < count($extensions); $i++) {
-                if ($nama[1] == $extensions[$i]) {
-                    $uploadName = implode('.', $nama);
-                    $media->move('media', $uploadName);
-                    $namaFile[] = $uploadName;
-                };
+
+            // jika ekstensi yang di ambil dari $nama[1] sama dengan ekstensi yang ada di $extensions
+            if ($nama[1] == $extensions[0] || $nama[1] == $extensions[1] || $nama[1] == $extensions[2] || $nama[1] == $extensions[3]) {
+                /*
+                maka gabungakan lagi variable $nama[0] dengan $nama[1]
+                dengan tanda titik sebagai penghubung dan simpan dalam variable $uploadName
+                 */
+                $uploadName = implode('.', $nama);
+
+                // memindahkan file yang sudah di upload ke folder public/media dengan nama yang ada di variable $uploadName
+                $media->move('media', $uploadName);
+
+                // menambahkan nama file yang sudah di upload ke dalam array $namaFile
+                $namaFile[] = $uploadName;
+            } else {
+                // mengambil nama original untuk menampilkan pesan error
+                $nama_ori = $media->getClientOriginalName();
+
+                // jika tidak sama dengan ekstensi yang ada di $extensions
+                // maka akan menampilkan pesan error
+                session()->flash('error', 'Ekstensi file ' . $nama_ori . ' tidak sesuai, file yang diperbolehkan hanya ' . implode(', ', $extensions));
+            }
+        }
+
+        if (session('error')) {
+            // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
+            $rules = [
+                'status_id' => 'required|integer|numeric',
+                'mata_pelajaran_id' => 'required|integer|numeric',
+                'judul_tugas' => 'required|max:255|string',
+                'deadline_at' => 'required|date',
+            ];
+
+            // menjalankan validasi
+            $validateData = $request->validate($rules);
+
+            // mengambil nama file yang sudah di upload
+            foreach ($namaFile as $nf) {
+                // menghapus file yang sudah di upload
+                unlink('media/' . $nf);
             }
 
+            // mengarahkan halaman untuk kembali
+            return redirect()->back();
         }
 
         $validateData = $request->validate([
