@@ -3,6 +3,13 @@
 @section('content')
     <div class="container mt-4">
         <div class="row">
+            @if (session('errors') || session('error'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    Jawaban gagal dikumpulkan, ada yang error! — <a href='' data-bs-toggle="modal"
+                        data-bs-target="#modalCenter">Cek error!</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             @foreach ($tasks as $task)
                 <div class="col-lg-3 col-md-4 mb-3">
                     <div
@@ -16,7 +23,8 @@
                             <a href="" class="btn btn-primary tombol-kumpulkan" data-bs-toggle="modal"
                                 data-bs-target="#modalCenter" data-id={{ $task->id }}>Kumpulkan</a>
                         </div>
-                        <div class="card-footer text-muted">{{ MyHelpers::strtodate($task->deadline_at)->diffForHumans() }}
+                        <div class="card-footer text-muted">
+                            {{ MyHelpers::strtodate($task->deadline_at)->diffForHumans() }}
                         </div>
                     </div>
                 </div>

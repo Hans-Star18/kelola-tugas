@@ -442,10 +442,7 @@ class TugasController extends Controller
         if (session('error')) {
             // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
             $rules = [
-                'status_id' => 'required|integer|numeric',
-                'mata_pelajaran_id' => 'required|integer|numeric',
-                'judul_tugas' => 'required|max:255|string',
-                'deadline_at' => 'required|date',
+                'id_task' => 'required|integer|numeric',
             ];
 
             // menjalankan validasi
@@ -461,11 +458,15 @@ class TugasController extends Controller
             return redirect()->back();
         }
 
-        $validateData = $request->validate([
-            'isi_jawaban' => '',
-            'id_task' => 'required',
-            'komentar' => '',
-        ]);
+        $rules = [
+            'id_task' => 'required|integer|numeric',
+        ];
+
+        // menjalankan validasi
+        $validateData = $request->validate($rules);
+
+        $validateData['isi_jawaban'] = $request->isi_jawaban;
+        $validatedData['komentar_jawaban'] = $request->komentar;
         $validateData['media_jawaban'] = json_encode($namaFile);
 
         Answer::create($validateData);
@@ -473,7 +474,7 @@ class TugasController extends Controller
             'status_id' => 1,
         ]);
 
-        return redirect('/tugas')->with('success', 'Tugas Sudah Terkumpul!!!');
+        return redirect('/tugas')->with('success', 'Tugas Sudah Disetor.');
     }
 
     /**
