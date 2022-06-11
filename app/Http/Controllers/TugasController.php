@@ -458,6 +458,7 @@ class TugasController extends Controller
             return redirect()->back();
         }
 
+        // membuat validasi untuk mengecek apakah semua data yang di inputkan sudah benar
         $rules = [
             'id_task' => 'required|integer|numeric',
         ];
@@ -465,15 +466,20 @@ class TugasController extends Controller
         // menjalankan validasi
         $validateData = $request->validate($rules);
 
+        // mengabil data tanpa memberika validasi
         $validateData['isi_jawaban'] = $request->isi_jawaban;
         $validatedData['komentar_jawaban'] = $request->komentar;
         $validateData['media_jawaban'] = json_encode($namaFile);
 
+        // menambahkan data yang sudah di inputkan ke dalam database
         Answer::create($validateData);
+
+        // memperbarui data di table task
         Task::where("id", $request->id_task)->update([
             'status_id' => 1,
         ]);
 
+        // menampilkan pesan sukses dan mengarahkan ke halaman yang dituju
         return redirect('/tugas')->with('success', 'Tugas Sudah Disetor.');
     }
 
