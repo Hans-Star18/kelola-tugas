@@ -157,21 +157,22 @@
                                             @foreach (json_decode($answer->media_jawaban) as $media)
                                                 @php
                                                     $namaMedia = explode('.', $media);
+                                                    $namaAsli = explode('_', $media);
                                                 @endphp
                                                 @if ($namaMedia[1] == 'jpg' || $namaMedia[1] == 'jpeg')
                                                     <a href="/tugas/{{ $task->id }}?content_type=image/jpeg&media={{ $media }}"
                                                         class="d-block">
-                                                        Gambar
+                                                        {{ $namaAsli[1] }}
                                                     </a>
                                                 @elseif($namaMedia[1] == 'png')
                                                     <a href="/tugas/{{ $task->id }}?content_type=image/png&media={{ $media }}"
                                                         class="d-block">
-                                                        Gambar
+                                                        {{ $namaAsli[1] }}
                                                     </a>
                                                 @elseif ($namaMedia[1] == 'pdf')
                                                     <a href="/tugas/{{ $task->id }}?content_type=application/pdf&media={{ $media }}"
                                                         class="d-block">
-                                                        Dokumen
+                                                        {{ $namaAsli[1] }}
                                                     </a>
                                                 @endif
                                             @endforeach
