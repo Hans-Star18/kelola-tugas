@@ -28,50 +28,45 @@
     <div class="table-responsive text-nowrap horizontal-example">
         <table class="table table-striped">
             <thead>
-                <tr class="text-nowrap">
-                    <th>#</th>
-                    <th>Judul Tugas</th>
-                    <th>Dikumpul Pada</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
+                @if ($tugas_selesai->total() == 0)
+                    <h3 class="text-center ">Data Tugas Tidak Ada</h3>
+                @else
+                    <tr class="text-nowrap">
+                        <th>#</th>
+                        <th>Judul Tugas</th>
+                        <th>Dikumpul Pada</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                @endif
             </thead>
             <tbody>
-                @php
-                    $i = 1;
-                    $count = collect([]);
-                @endphp
-                @foreach ($tasks as $task)
-                    @if ($task->status_id == 1)
-                        @php
-                            $count[] = $task;
-                        @endphp
-                        <tr>
-                            <th scope="row">{{ $i++ }}</th>
-                            <td>
-                                <span class="" data-bs-toggle="tooltip" data-bs-offset="0,4"
-                                    data-bs-placement="right" data-bs-html="true" title="{{ $task->mata_pelajaran }}">
-                                    {{ $task->judul_tugas }}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="text-success">
-                                    {{ date('d - m - Y', strtotime($task->tanggal_dikumpul)) }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="badge bg-success">{{ $task->status_name }}</div>
-                            </td>
-                            <td>
-                                <a href="tugas/{{ $task->id }}" class="badge bg-info">Detail</a>
-                            </td>
-                        </tr>
-                    @endif
+                @foreach ($tugas_selesai as $item)
+                    <tr>
+                        <th scope="row">{{ $loop->index + $tugas_selesai->firstItem() }}</th>
+                        <td>
+                            <span class="" data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                data-bs-placement="right" data-bs-html="true" title="{{ $item->mata_pelajaran }}">
+                                {{ $item->judul_tugas }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="text-success">
+                                {{ date('d - m - Y', strtotime($item->tanggal_dikumpul)) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="badge bg-success">{{ $item->status_name }}</div>
+                        </td>
+                        <td>
+                            <a href="tugas/{{ $item->id }}" class="badge bg-info">Detail</a>
+                        </td>
+                    </tr>
                 @endforeach
-                @if ($count->isEmpty())
-                    <h3 class="text-center ">Data Tugas Tidak Ada</h3>
-                @endif
             </tbody>
         </table>
     </div>
+</div>
+<div class="d-flex justify-content-center mt-3">
+    {{ $tugas_selesai->links() }}
 </div>
