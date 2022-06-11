@@ -23,7 +23,8 @@
                                 <div id="accordionIcon-1" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
-                                        <input id="isi_jawaban" type="hidden" name="isi_jawaban">
+                                        <input id="isi_jawaban" type="hidden" name="isi_jawaban"
+                                            value="{{ old('isi_jawaban') }}">
                                         <trix-editor input="isi_jawaban"></trix-editor>
                                     </div>
                                 </div>
@@ -41,7 +42,7 @@
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
                                         <div>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar">{{ old('komentar') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -68,12 +69,18 @@
                                             </div>
                                         </div>
                                         <div class="form-input-media" id="inputMedia">
-                                            <input class="form-control mb-1" type="file" id="inputFile"
-                                                name="media_tugas" />
+                                            <input
+                                                class="form-control mb-1 {{ session('error') ? 'is-invalid' : '' }}"
+                                                type="file" id="inputFile" name="media_tugas" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @if (session('error'))
+                                <div class="blockquote-footer mt-2 text-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
 
