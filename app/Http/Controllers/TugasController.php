@@ -176,6 +176,7 @@ class TugasController extends Controller
         dan mengirimkan data yang diperlukan ke view
          */
         return view('tugas.detail_tugas', [
+            'title' => 'Detail Tugas',
             'task' => MyHelpers::tasks()->where('tasks.id', $id)->first(), // mengambil data yang ada di database berdasarkan id yang dikirimkan
             'answers' => Answer::All(), // mengambil semua data di table answers
             'answer' => Answer::where('id_task', $id)->first(), // mengambil data yang ada di table answers berdasarkan id_task yang dikirimkan

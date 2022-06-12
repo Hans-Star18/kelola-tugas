@@ -1,4 +1,36 @@
-@extends('tugas.layouts.main')
+@extends('layouts.main')
+
+@push('styles')
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/vendor/libs/swiper/swiper-bundle.min.css">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/css/demo.css" />
+    <link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+@endpush
+
+@push('scripts')
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="/vendor/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="/vendor/libs/jquery/jquery.js"></script>
+    <script src="/vendor/libs/popper/popper.js"></script>
+    <script src="/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/vendor/js/bootstrap.js"></script>
+
+    <script src="/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Main JS -->
+    <script src="/js/script.js"></script>
+    <script src="/js/main.js"></script>
+@endpush
 
 @section('content')
     @if ($task->status_id == 0 && MyHelpers::strtodate($task->deadline_at)->diff()->invert == 1)
