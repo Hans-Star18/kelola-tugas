@@ -33,6 +33,7 @@ class TugasController extends Controller
 
         // mengambil tugas dengan status sudah selesai / 1
         $tugasSelesai = $tasks->where('status_id', 1)->paginate(10)->withQueryString();
+        $tugasBelumSelesai = $tasks->where('status_id', 0)->paginate(10)->withQueryString();
 
         /*
         mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama semua_tugas.blade.php
