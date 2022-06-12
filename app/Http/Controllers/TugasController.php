@@ -31,12 +31,16 @@ class TugasController extends Controller
             $tasks = $tasks->where('mata_pelajaran', request('mata_pelajaran'));
         }
 
+        // mengambil tugas dengan status sudah selesai / 1
+        $tugasSelesai = $tasks->where('status_id', 1)->paginate(10)->withQueryString();
+
         /*
         mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama semua_tugas.blade.php
         dan mengirimkan data yang diperlukan ke view
          */
         return view('tugas.semua_tugas', [
             'title' => 'Semua Tugas',
+            'tugas_selesai' => $tugasSelesai,
             'tasks' => $tasks->get(),
             'mataPelajaran' => MataPelajaran::All(),
         ]);
