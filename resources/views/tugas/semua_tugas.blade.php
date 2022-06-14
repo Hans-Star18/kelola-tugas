@@ -16,7 +16,16 @@
                     </button>
                     <ul class="dropdown-menu vertical-example" aria-labelledby="defaultDropdown" style="max-height: 200px">
                         <li>
-                            @if (request('status'))
+                            @if (request('status') && request('search'))
+                                <a class="dropdown-item"
+                                    href="/tugas?status={{ request('status') }}&search={{ request('search') }}">
+                                    Semua
+                                </a>
+                            @elseif(request('search'))
+                                <a class="dropdown-item" href="/tugas?search={{ request('search') }}">
+                                    Semua
+                                </a>
+                            @elseif (request('status'))
                                 <a class="dropdown-item" href="/tugas?status={{ request('status') }}">
                                     Semua
                                 </a>
@@ -26,7 +35,17 @@
                         </li>
                         @foreach ($mataPelajaran as $item)
                             <li>
-                                @if (request('status'))
+                                @if (request('status') && request('search'))
+                                    <a class="dropdown-item"
+                                        href="/tugas?mata_pelajaran={{ $item->mata_pelajaran }}&status={{ request('status') }}&search={{ request('search') }}">
+                                        {{ $item->mata_pelajaran }}
+                                    </a>
+                                @elseif(request('search'))
+                                    <a class="dropdown-item"
+                                        href="/tugas?mata_pelajaran={{ $item->mata_pelajaran }}&search={{ request('search') }}">
+                                        {{ $item->mata_pelajaran }}
+                                    </a>
+                                @elseif (request('status'))
                                     <a class="dropdown-item"
                                         href="/tugas?mata_pelajaran={{ $item->mata_pelajaran }}&status={{ request('status') }}">
                                         {{ $item->mata_pelajaran }}
@@ -51,7 +70,16 @@
                     </button>
                     <ul class="dropdown-menu vertical-example" aria-labelledby="defaultDropdown" style="max-height: 200px">
                         <li>
-                            @if (request('mata_pelajaran'))
+                            @if (request('mata_pelajaran') && request('search'))
+                                <a class="dropdown-item"
+                                    href="/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&search={{ request('search') }}">
+                                    Semua
+                                </a>
+                            @elseif(request('search'))
+                                <a class="dropdown-item" href="/tugas?search={{ request('search') }}">
+                                    Semua
+                                </a>
+                            @elseif (request('mata_pelajaran'))
                                 <a class="dropdown-item" href="/tugas?mata_pelajaran={{ request('mata_pelajaran') }}">
                                     Semua
                                 </a>
@@ -61,7 +89,17 @@
                         </li>
                         @foreach ($statuses as $item)
                             <li>
-                                @if (request('mata_pelajaran'))
+                                @if (request('mata_pelajaran') && request('search'))
+                                    <a class="dropdown-item"
+                                        href="/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&status={{ $item->status_name }}&search={{ request('search') }}">
+                                        {{ $item->status_name }}
+                                    </a>
+                                @elseif(request('search'))
+                                    <a class="dropdown-item"
+                                        href="/tugas?status={{ $item->status_name }}&search={{ request('search') }}">
+                                        {{ $item->status_name }}
+                                    </a>
+                                @elseif (request('mata_pelajaran'))
                                     <a class="dropdown-item"
                                         href="/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&status={{ $item->status_name }}">
                                         {{ $item->status_name }}

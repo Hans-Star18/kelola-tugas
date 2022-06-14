@@ -42,6 +42,11 @@ class TugasController extends Controller
             $tasks = $tasks->where('status_id', $status);
         }
 
+        if (request('search')) {
+            // mengambil data tugas berdasarkan keyword yang diinputkan
+            $tasks = $tasks->where('judul_tugas', 'like', '%' . request('search') . '%');
+        }
+
         /*
         mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama semua_tugas.blade.php
         dan mengirimkan data yang diperlukan ke view

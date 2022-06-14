@@ -10,13 +10,26 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
+        @if (request('mata_pelajaran') && request('status'))
+            <form
+                onsubmit="location.href=`/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&status={{ request('status') }}&search=${$('.search').val()}`;return false">
+            @elseif(request('status'))
+                <form
+                    onsubmit="location.href=`/tugas?status={{ request('status') }}&search=${$('.search').val()}`;return false">
+                @elseif(request('mata_pelajaran'))
+                    <form
+                        onsubmit="location.href=`/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&search=${$('.search').val()}`;return false">
+                    @else
+                        <form onsubmit="location.href=`/tugas?search=${$('.search').val()}`;return false">
+        @endif
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
                 <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                    aria-label="Search..." />
+                <input type="text" class="form-control border-0 shadow-none search" placeholder="Search..."
+                    aria-label="Search..." name="search" value="{{ request('search') }}" />
             </div>
         </div>
+        </form>
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
