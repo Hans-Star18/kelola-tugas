@@ -56,6 +56,7 @@ $(".tombol-hapus").on("click", function () {
 $(function () {
     $(".edit-button").on("click", function () {
         const id = $(this).data("id");
+        const status = $(this).data("status");
         $(".modal-body form").attr("action", `/tugas/${id}`);
 
         $.ajax({
@@ -75,6 +76,11 @@ $(function () {
                     "selected",
                     true
                 );
+                if (data.status_id == 0) {
+                    $("#radio1").attr("checked", true);
+                } else {
+                    $("#radio2").attr("checked", true);
+                }
                 if (data.media_tugas) {
                     let mediaTugas = data.media_tugas.split(",");
                     let gambar_lama = [];

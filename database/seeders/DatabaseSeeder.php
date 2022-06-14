@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Task::factory(50)->create();
+        Task::factory(500)->create();
 
         Status::create([
             'id' => '0',
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'mata_pelajaran' => 'Fisika',
         ]);
         MataPelajaran::create([
-            'mata_pelajaran' => 'Seni Buadaya',
+            'mata_pelajaran' => 'Seni Budaya',
         ]);
         MataPelajaran::create([
             'mata_pelajaran' => 'Bahasa Inggris',

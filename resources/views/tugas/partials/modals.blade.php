@@ -136,8 +136,7 @@
                     @method('put')
                     <div class="status-tugas mb-3">
                         <div class="form-check">
-                            <input name="status_id" class="form-check-input" type="radio" value="0" id="radio1"
-                                checked />
+                            <input name="status_id" class="form-check-input" type="radio" value="0" id="radio1" />
                             <label class="form-check-label" for="radio1"> Belum Selesai </label>
                         </div>
                         <div class="form-check">

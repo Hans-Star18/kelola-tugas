@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\MyHelpers;
 use App\Models\Answer;
 use App\Models\MataPelajaran;
+use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -31,13 +32,24 @@ class TugasController extends Controller
             $tasks = $tasks->where('mata_pelajaran', request('mata_pelajaran'));
         }
 
+        if (request('status')) {
+            if (request('status') == 'Sudah Selesai') {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+            // mengambil data tugas berdasarkan status yang dipilih
+            $tasks = $tasks->where('status_id', $status);
+        }
+
         /*
         mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama semua_tugas.blade.php
         dan mengirimkan data yang diperlukan ke view
          */
         return view('tugas.semua_tugas', [
             'title' => 'Semua Tugas',
-            'tasks' => $tasks->get(),
+            'tasks' => $tasks->paginate(10)->withQueryString(),
+            'statuses' => Status::All(),
             'mataPelajaran' => MataPelajaran::All(),
         ]);
     }

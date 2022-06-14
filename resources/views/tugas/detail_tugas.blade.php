@@ -33,10 +33,9 @@
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <h5 class="card-title">{{ $task->judul_tugas }}
-                        @if ($task->status_id == 0)
-                            <a href='' class="edit-button" data-bs-toggle="modal" data-bs-target="#fullscreenModal"
-                                data-id="{{ $task->id }}"><i class='bx bx-edit'></i></a>
-                        @endif
+                        <a href='' class="edit-button" data-bs-toggle="modal" data-bs-target="#fullscreenModal"
+                            data-id="{{ $task->id }}" data-status={{ $task->status_id }}><i
+                                class='bx bx-edit'></i></a>
                     </h5>
                     <p class="card-text">{{ $task->deskripsi_tugas }}</p>
 
