@@ -20,7 +20,11 @@
                     <form
                         onsubmit="location.href=`/tugas?mata_pelajaran={{ request('mata_pelajaran') }}&search=${$('.search').val()}`;return false">
                     @else
-                        <form onsubmit="location.href=`/tugas?search=${$('.search').val()}`;return false">
+                        @if (Request::is('tugas/setor*'))
+                            <form onsubmit="location.href=`/tugas/setor?search=${$('.search').val()}`;return false">
+                            @else
+                                <form onsubmit="location.href=`/tugas?search=${$('.search').val()}`;return false">
+                        @endif
         @endif
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">

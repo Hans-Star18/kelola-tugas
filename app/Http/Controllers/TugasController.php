@@ -390,13 +390,22 @@ class TugasController extends Controller
      */
     public function setor_tugas()
     {
+        // mengambil data tugas belum selesai dari database
+        $tasks = MyHelpers::tasks()->where('status_id', 0);
+
+        if (request('search')) {
+            // mengambil data tugas berdasarkan keyword yang diinputkan
+            $tasks = $tasks->where('judul_tugas', 'like', '%' . request('search') . '%')
+                ->orWhere('mata_pelajaran', 'like', '%' . request('search') . '%');
+        }
+
         /*
         mengembalikan/ menampilkan data yang ada di view folder tugas dengan nama setor_tugas.blade.php
         dan mengirimkan data yang diperlukan ke view
          */
         return view('tugas.setor_tugas', [
             'title' => 'Setor Tugas',
-            'tasks' => MyHelpers::tasks()->get()->where('status_id', 0),
+            'tasks' => $tasks->paginate(12)->withQueryString(),
             'mataPelajaran' => MataPelajaran::All(),
         ]);
     }

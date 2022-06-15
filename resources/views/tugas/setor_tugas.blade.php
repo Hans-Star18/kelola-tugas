@@ -32,10 +32,20 @@
                             </div>
                         </div>
                     @endforeach
+                    @if ($tasks->count() == 0)
+                        <div class="text-center">
+                            <h4>Tidak Ada Tugas</h4>
+                        </div>
+                    @endif
+
+                    <div class="d-flex flex-wrap justify-content-center align-items-center mt-4 ">
+                        <small>{{ $tasks->onEachSide(0)->links() }}</small>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
-@include('tugas.partials.modals')
+@push('modals_tugas')
+    @include('tugas.partials.modals')
+@endpush

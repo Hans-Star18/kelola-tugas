@@ -302,4 +302,6 @@
     </div>
     <!-- / Content -->
 @endsection
-@include('partials.modals')
+@push('modals')
+    @include('partials.modals')
+@endpush

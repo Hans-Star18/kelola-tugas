@@ -45,7 +45,6 @@
         trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
-
     </style>
     <script>
         document.addEventListener("trix-file-accept", function(e) {
@@ -114,6 +113,8 @@
     </div>
     <!-- / Layout wrapper -->
 
+    @stack('modals')
+    @stack('modals_tugas')
 
     <!-- Core JS -->
 
