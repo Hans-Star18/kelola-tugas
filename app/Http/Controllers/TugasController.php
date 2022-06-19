@@ -197,6 +197,7 @@ class TugasController extends Controller
             'answers' => Answer::All(), // mengambil semua data di table answers
             'answer' => Answer::where('id_task', $id)->first(), // mengambil data yang ada di table answers berdasarkan id_task yang dikirimkan
             'mataPelajaran' => MataPelajaran::All(), // mengambil semua data di table mata pelajaran
+            'title' => 'Detail Tugas',
         ]);
     }
 

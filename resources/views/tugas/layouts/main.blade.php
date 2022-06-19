@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Detail Tugas</title>
+    <title>{{ $title }}</title>
 
     <meta name="description" content="" />
 
@@ -38,6 +38,9 @@
 
     <link rel="stylesheet" href="/vendor/libs/apex-charts/apex-charts.css" />
 
+    <!-- Custom CSS -->
+    @stack('styles')
+
     <script src="/js/config.js"></script>
     <script src="/vendor/js/helpers.js"></script>
 </head>
@@ -59,7 +62,8 @@
 
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                        <div
+                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>
