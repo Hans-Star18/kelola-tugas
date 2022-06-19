@@ -50,7 +50,7 @@
 
                         <p class="text-center">
                             <span>Belum punya akun?</span>
-                            <a href="/user/register">
+                            <a href="/user/registrasi">
                                 <span>Buat akun.</span>
                             </a>
                         </p>

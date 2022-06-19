@@ -28,5 +28,5 @@ Route::get('/tugas/get_data_tugas', [TugasController::class, 'get_data_tugas']);
 Route::resource('/tugas', TugasController::class);
 
 Route::get('user/login', [UserController::class, 'login']);
-Route::get('user/register', [UserController::class, 'register']);
+Route::get('user/registrasi', [UserController::class, 'registrasi']);
 Route::resource('/user', UserController::class);
