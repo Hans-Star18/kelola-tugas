@@ -136,16 +136,19 @@
                     @method('put')
                     <div class="status-tugas mb-3">
                         <div class="form-check">
-                            <input name="status_id" class="form-check-input" type="radio" value="0" id="radio1" />
+                            <input name="status_id" class="form-check-input" type="radio" value="0"
+                                id="radio1" />
                             <label class="form-check-label" for="radio1"> Belum Selesai </label>
                         </div>
                         <div class="form-check">
-                            <input name="status_id" class="form-check-input" type="radio" value="1" id="radio2" />
+                            <input name="status_id" class="form-check-input" type="radio" value="1"
+                                id="radio2" />
                             <label class="form-check-label" for="radio2"> Sudah Selesai </label>
                         </div>
                     </div>
                     <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
-                    <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
+                    <input type="hidden" id="update" name="tanggal_dikumpul"
+                        value="{{ date('d-m-Y h:i:s') }}">
                     <input type="hidden" id="gambar_lama" name="gambar_lama">
                     <input type="hidden" id="gambar_dihapus" name="gambar_dihapus">
                     <div class="col-lg-3 col-md-6 mb-3">
@@ -206,8 +209,8 @@
                             </div>
                         </div>
                         <div class="form-input-media" id="inputMedia">
-                            <input class="form-control mb-1 {{ session('error') ? 'is-invalid' : '' }}" type="file"
-                                id="inputFile" name="media_tugas" />
+                            <input class="form-control mb-1 {{ session('error') ? 'is-invalid' : '' }}"
+                                type="file" id="inputFile" name="media_tugas" />
                             @if (session('error'))
                                 <div class="invalid-feedback">
                                     {{ session('error') }}

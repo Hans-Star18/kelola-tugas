@@ -494,7 +494,7 @@ class TugasController extends Controller
 
         // mengabil data tanpa memberika validasi
         $validateData['isi_jawaban'] = $request->isi_jawaban;
-        $validatedData['komentar_jawaban'] = $request->komentar;
+        $validateData['komentar'] = $request->komentar;
         $validateData['media_jawaban'] = json_encode($namaFile);
 
         // menambahkan data yang sudah di inputkan ke dalam database

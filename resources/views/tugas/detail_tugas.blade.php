@@ -89,9 +89,10 @@
             </div>
             <div class="">
                 <hr>
-                <a href="/tugas" class="card-link">Kembali</a>
-                <a href="" class="card-link text-danger tombol-hapus" data-bs-toggle="modal" data-bs-target="#smallModal"
-                    data-id="{{ $task->id }}" data-konfirmasi="{{ $task->judul_tugas }}">Hapus</a>
+                <a href="{{ url()->previous() }}" class="card-link">Kembali</a>
+                <a href="" class="card-link text-danger tombol-hapus" data-bs-toggle="modal"
+                    data-bs-target="#smallModal" data-id="{{ $task->id }}"
+                    data-konfirmasi="{{ $task->judul_tugas }}">Hapus</a>
                 @if ($task->status_id == 1)
                     <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                         aria-controls="collapseExample" class="card-link text-success">Jawaban</a>
@@ -141,7 +142,8 @@
                             </div>
 
                             <div class="accordion-item card">
-                                <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
+                                <h2 class="accordion-header text-body d-flex justify-content-between"
+                                    id="accordionIconTwo">
                                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                                         data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3">
                                         Media
