@@ -90,7 +90,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Profil</span></li>
 
         <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/user" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">My Profil</div>
             </a>
