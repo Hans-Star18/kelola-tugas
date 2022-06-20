@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //
+        dd('hello');
     }
 
     /**
@@ -90,6 +92,21 @@ class UserController extends Controller
         ]);
     }
 
+    public function authenticated(Request $request)
+    {
+        $email = $request->email_username;
+        $username = $request->email_username;
+        $password = $request->password;
+        $remember = $request->remember;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember) || Auth::attempt(['username' => $username, 'password' => $password], $remember)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+
+        return back()->with('loginError', 'Gagal masuk, coba lagi!');
+    }
+
     public function registrasi()
     {
         return view('user.register', [
@@ -103,7 +120,7 @@ class UserController extends Controller
             'name' => 'required|string|max:50',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users|email:rfc,dns',
-            'password' => 'required|confirmed|min:8|max:16',
+            'password' => 'required|min:8|max:16',
             'repeat_password' => 'required|same:password|min:8|max:16',
         ];
 
@@ -112,5 +129,18 @@ class UserController extends Controller
         $validateData['password'] = bcrypt($validateData['password']);
 
         User::create($validateData);
+
+        return redirect('/user/login')->with('success', 'Berhasil mendaftar, silahkan login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/user/login');
     }
 }

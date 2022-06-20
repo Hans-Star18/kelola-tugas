@@ -19,36 +19,68 @@
                         <!-- /Logo -->
 
                         <form id="formAuthentication" class="mb-3" action="" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter your name" autofocus />
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" placeholder="Enter your name" autofocus
+                                    value="{{ old('name') }}" />
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Enter your username" autofocus />
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                    id="username" name="username" placeholder="Enter your username"
+                                    value="{{ old('username') }}" />
+                                @error('username')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter your email" />
+                                <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                    id="email" name="email" placeholder="Enter your email"
+                                    value="{{ old('email') }}" />
+                                @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
+                                    <input type="password" id="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="repeat-password">Repeat Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="repeat-password" class="form-control" name="repeat_password"
+                                    <input type="password" id="repeat-password"
+                                        class="form-control @error('repeat_password') is-invalid @enderror"
+                                        name="repeat_password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
+                                    @error('repeat_password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>

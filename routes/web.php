@@ -20,13 +20,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/tugas/setor', [TugasController::class, 'setor_tugas']);
+Route::get('/tugas/setor', [TugasController::class, 'setor_tugas'])->middleware('auth');
 Route::post('/tugas/setor', [TugasController::class, 'setor']);
 Route::get('/tugas/get_data_tugas', [TugasController::class, 'get_data_tugas']);
-Route::resource('/tugas', TugasController::class);
+Route::resource('/tugas', TugasController::class)->middleware('auth');
 
-Route::get('user/login', [UserController::class, 'login']);
-Route::get('user/registrasi', [UserController::class, 'registrasi']);
-Route::resource('/user', UserController::class);
+Route::get('user/login', [UserController::class, 'login'])->middleware('guest');
+Route::post('user/login', [UserController::class, 'authenticated']);
+Route::get('user/registrasi', [UserController::class, 'registrasi'])->middleware('guest');
+Route::post('user/registrasi', [UserController::class, 'register']);
+Route::get('user/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::resource('/user', UserController::class)->middleware('auth');
