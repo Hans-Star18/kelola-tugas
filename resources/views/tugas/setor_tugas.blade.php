@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('aside')
+    @include('partials.aside')
+@endpush
+
 @section('content')
     <div class="container mt-4">
         <div class="card">

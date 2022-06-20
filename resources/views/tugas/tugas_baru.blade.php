@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('aside')
+    @include('partials.aside')
+@endpush
+
 @section('content')
     <!-- Content -->
     <div class="container mt-4">
@@ -50,8 +54,9 @@
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="judulTugas" class="form-label">Judul Tugas</label>
-                        <input type="text" class="form-control @error('judul_tugas') is-invalid @enderror" id="judulTugas"
-                            placeholder="Tugas Integral" name="judul_tugas" value="{{ old('judul_tugas') }}" />
+                        <input type="text" class="form-control @error('judul_tugas') is-invalid @enderror"
+                            id="judulTugas" placeholder="Tugas Integral" name="judul_tugas"
+                            value="{{ old('judul_tugas') }}" />
                         @error('judul_tugas')
                             <div class="invalid-feedback">
                                 {{ $message }}

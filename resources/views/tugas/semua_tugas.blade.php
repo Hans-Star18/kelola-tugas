@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('aside')
+    @include('partials.aside')
+@endpush
+
 @section('content')
     <div class="bs-toast toast toast-placement-ex bg-success top-0 start-0 fade {{ session()->has('success') ? 'show' : '' }} m-2"
         role="alert" aria-live="assertive" aria-atomic="true">

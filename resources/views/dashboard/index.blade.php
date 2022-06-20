@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('aside')
+    @include('partials.aside')
+@endpush
+
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -41,12 +45,11 @@
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div class="avatar flex-shrink-0">
-                                            <img src="/img/icons/unicons/cc-primary.png" alt="cc primary"
-                                                class="rounded" />
+                                            <img src="/img/icons/unicons/cc-primary.png" alt="cc primary" class="rounded" />
                                         </div>
                                         <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt3"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
@@ -70,12 +73,11 @@
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div class="avatar flex-shrink-0">
-                                            <img src="/img/icons/unicons/cc-warning.png" alt="cc warning"
-                                                class="rounded" />
+                                            <img src="/img/icons/unicons/cc-warning.png" alt="cc warning" class="rounded" />
                                         </div>
                                         <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt3"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
@@ -99,12 +101,11 @@
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div class="avatar flex-shrink-0">
-                                            <img src="/img/icons/unicons/cc-success.png" alt="cc success"
-                                                class="rounded" />
+                                            <img src="/img/icons/unicons/cc-success.png" alt="cc success" class="rounded" />
                                         </div>
                                         <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt3"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
@@ -137,7 +138,8 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                <a class="dropdown-item " href="javascript:void(0);" data-bs-toggle="modal"
+                                                <a class="dropdown-item " href="javascript:void(0);"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#modal-tenggat-minggu-ini">Detail</a>
                                             </div>
                                         </div>
@@ -165,7 +167,8 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                                <a class="dropdown-item " href="javascript:void(0);" data-bs-toggle="modal"
+                                                <a class="dropdown-item " href="javascript:void(0);"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#modal-tugas-lewat-waktu">Detail</a>
                                             </div>
                                         </div>
@@ -203,20 +206,20 @@
                                             <small>{{ $task->mataPelajaran->mata_pelajaran }}</small>
                                             @if ($task->status_id == 1)
                                                 <span class="badge badge-center rounded-pill bg-success ms-2"
-                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="right"
-                                                    data-bs-html="true" title="Sudah Selesai">
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                                    data-bs-placement="right" data-bs-html="true" title="Sudah Selesai">
                                                     <i class='tf-icons bx bx-check'></i>
                                                 </span>
                                             @elseif ($task->status_id == 0 && $task->deadline_at->diff()->invert == 1)
                                                 <span class="badge badge-center rounded-pill bg-warning ms-2"
-                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="right"
-                                                    data-bs-html="true" title="Belum Selesai">
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                                    data-bs-placement="right" data-bs-html="true" title="Belum Selesai">
                                                     <i class='tf-icons bx bx-x'></i>
                                                 </span>
                                             @else
                                                 <span class=" badge badge-center rounded-pill bg-danger ms-2"
-                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="right"
-                                                    data-bs-html="true" title="Lewat Waktu">
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                                    data-bs-placement="right" data-bs-html="true" title="Lewat Waktu">
                                                     <i class='tf-icons bx bx-time'></i>
                                                 </span>
                                             @endif

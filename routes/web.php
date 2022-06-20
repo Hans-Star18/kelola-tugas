@@ -27,7 +27,7 @@ Route::post('/tugas/setor', [TugasController::class, 'setor']);
 Route::get('/tugas/get_data_tugas', [TugasController::class, 'get_data_tugas']);
 Route::resource('/tugas', TugasController::class)->middleware('auth');
 
-Route::get('user/login', [UserController::class, 'login'])->middleware('guest');
+Route::get('user/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::post('user/login', [UserController::class, 'authenticated']);
 Route::get('user/registrasi', [UserController::class, 'registrasi'])->middleware('guest');
 Route::post('user/registrasi', [UserController::class, 'register']);
