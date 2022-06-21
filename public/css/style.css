@@ -4,25 +4,74 @@
     overflow-x: hidden;
 }
 
+.card-profil {
+    padding: 35px;
+}
+
 span.location {
     position: absolute;
-    top: 36px;
+    top: 68px;
     margin-left: 25px;
     display: inline-block;
+}
+
+.tugas-label {
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.garis-bawah-profile {
+    display: none;
+}
+
+.jumlah-tugas {
+    font-weight: bold;
+    font-size: 2em;
 }
 
 @media (max-width: 991.98px) {
     span.location {
         position: relative;
-        top: 10px;
+        top: 5px;
         margin-left: 0;
         display: block;
+    }
+    .email {
+        margin-top: 10px;
+    }
+    .tugas-label {
+        font-weight: bold;
+        margin-top: 0px;
     }
 }
 
 @media (max-width: 767.98px) {
     .information {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .name-address {
         text-align: center;
-        margin-top: 5px;
+    }
+    .card-profil {
+        padding: 0;
+    }
+    .gambar-profil {
+        display: flex;
+        justify-content: center;
+    }
+    span.location {
+        position: relative;
+        top: 5px;
+        margin-left: 0;
+        display: block;
+    }
+    .tugas-label {
+        font-weight: bold;
+        margin-top: 0px;
+    }
+    .garis-bawah-profile {
+        display: block;
     }
 }
