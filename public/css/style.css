@@ -10,8 +10,8 @@
 
 span.location {
     position: absolute;
-    top: 68px;
-    margin-left: 25px;
+    top: 80px;
+    margin-left: 310px;
     display: inline-block;
 }
 
@@ -41,6 +41,9 @@ span.location {
         margin-left: 0;
         display: block;
     }
+    .name {
+        margin-bottom: 0;
+    }
     .email {
         margin-top: 10px;
     }
@@ -65,9 +68,11 @@ span.location {
         display: flex;
         justify-content: center;
     }
+    .name {
+        margin-bottom: 0;
+    }
     span.location {
         position: relative;
-        top: 5px;
         margin-left: 0;
         display: block;
     }

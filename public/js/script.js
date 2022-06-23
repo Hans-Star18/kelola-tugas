@@ -168,6 +168,8 @@ $(".tombol-edit-profil").on("click", function () {
     $("#jenis_kelamin").attr("disabled", false);
     $("#tempat_lahir").attr("readonly", false);
     $("#tanggal_lahir").attr("readonly", false);
+    $("#tanggal_lahir").attr("type", "date");
+    $("#tanggal_lahir").val($(this).data("tanggal_lahir"));
     $("#alamat").attr("readonly", false);
     $("#no_handphone").attr("readonly", false);
     $("#jenjang_pendidikan").attr("readonly", false);
