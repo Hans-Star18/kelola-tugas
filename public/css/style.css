@@ -29,6 +29,10 @@ span.location {
     font-weight: bold;
     font-size: 2em;
 }
+.tombol-simpan-edit,
+.tombol-batal-edit {
+    display: none;
+}
 
 @media (max-width: 991.98px) {
     span.location {

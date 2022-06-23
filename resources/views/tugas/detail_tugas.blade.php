@@ -89,7 +89,8 @@
             </div>
             <div class="">
                 <hr>
-                <a href="{{ url()->previous() }}" class="card-link">Kembali</a>
+                <a href="{{ url()->previous() != url()->current() ? url()->previous() : '/tugas' }}"
+                    class="card-link">Kembali</a>
                 <a href="" class="card-link text-danger tombol-hapus" data-bs-toggle="modal"
                     data-bs-target="#smallModal" data-id="{{ $task->id }}"
                     data-konfirmasi="{{ $task->judul_tugas }}">Hapus</a>
@@ -152,7 +153,7 @@
                                 <div id="accordionIcon-3" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionIcon">
                                     <div class="accordion-body">
-                                        @if ($answer === null || $answer->media_jawaban === [])
+                                        @if ($answer == null || $answer->media_jawaban == [])
                                             <h5>Tidak Ada Media Yang Tersedia</h5>
                                         @else
                                             @foreach (json_decode($answer->media_jawaban) as $media)

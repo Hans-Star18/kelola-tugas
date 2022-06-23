@@ -96,10 +96,12 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+    <script src="/vendor/libs/swiper/swiper-bundle.min.js"></script>
     <script src="/vendor/libs/jquery/jquery.js"></script>
     <script src="/vendor/libs/popper/popper.js"></script>
     <script src="/vendor/js/bootstrap.js"></script>
     <script src="/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/js/script.js"></script>
 
     <script src="/vendor/js/menu.js"></script>
     <!-- endbuild -->

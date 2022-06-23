@@ -53,6 +53,10 @@ $(".tombol-hapus").on("click", function () {
     );
 });
 
+$(".tombol-batal-edit").on("click", function () {
+    window.location = window.location.pathname;
+});
+
 $(function () {
     $(".edit-button").on("click", function () {
         const id = $(this).data("id");
@@ -154,4 +158,18 @@ $(function () {
             },
         });
     });
+});
+
+$(".tombol-edit-profil").on("click", function () {
+    $(".tombol-batal-edit").show();
+    $(".tombol-simpan-edit").show();
+    $(".no_handphone_warning").show();
+    $("#nama_lengkap").attr("readonly", false);
+    $("#jenis_kelamin").attr("disabled", false);
+    $("#tempat_lahir").attr("readonly", false);
+    $("#tanggal_lahir").attr("readonly", false);
+    $("#alamat").attr("readonly", false);
+    $("#no_handphone").attr("readonly", false);
+    $("#jenjang_pendidikan").attr("readonly", false);
+    $("#jurusan").attr("readonly", false);
 });
