@@ -35,7 +35,7 @@
 
                         <a href="#biodata" class="btn btn-outline-success tombol-lg tombol-edit-profil"
                             data-tanggal_lahir="{{ $biodata->tanggal_lahir }}">
-                            <span class="tf-icons bx bx-edit"></span>&nbsp; Edit Profil
+                            <span class="tf-icons bx bx-edit"></span>&nbsp; Edit Biodata
                         </a>
                         <a href="{{ url()->previous() != url()->current() ? url()->previous() : '/' }}"
                             class="btn btn-outline-primary tombol-lg">

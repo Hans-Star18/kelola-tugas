@@ -45,6 +45,14 @@ class UserController extends Controller
         return redirect()->route('user_profil')->with('success', 'Berhasil Memperbarui Data');
     }
 
+    public function edit_profile()
+    {
+        return view('user.edit_profile', [
+            'title' => 'Edit Profile',
+            'biodata' => new data_kosong(),
+        ]);
+    }
+
     public function login()
     {
         return view('user.login', [
@@ -61,6 +69,7 @@ class UserController extends Controller
 
         if (Auth::attempt(['email' => $email, 'password' => $password], $remember) || Auth::attempt(['username' => $username, 'password' => $password], $remember)) {
             $request->session()->regenerate();
+
             return redirect()->intended('/');
         }
 

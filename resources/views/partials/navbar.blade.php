@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="/user/{{ auth()->user()->id }}/edit">
                             <i class="bx bx-edit-alt me-2"></i>
                             <span class="align-middle">Edit Profile</span>
                         </a>

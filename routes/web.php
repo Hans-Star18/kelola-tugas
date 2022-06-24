@@ -33,4 +33,5 @@ Route::get('user/registrasi', [UserController::class, 'registrasi'])->middleware
 Route::post('user/registrasi', [UserController::class, 'register']);
 Route::get('user/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/user', [UserController::class, 'index'])->name('user_profil')->middleware('auth');
-Route::post('/user', [UserController::class, 'edit'])->middleware('auth');
+Route::post('/user', [UserController::class, 'edit']);
+Route::get('/user/{user:id}/edit', [UserController::class, 'edit_profile'])->middleware('auth');
