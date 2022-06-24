@@ -37,21 +37,6 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        // $rules = [
-        //     'nama_lengkap' => 'string|max:50|min:3',
-        //     'tanggal_lahir' => 'date',
-        //     'no_handphone' => 'numeric',
-        // ];
-
-        // $validateData = $request->validate($rules);
-        // $validateData['user_id'] = Auth::user()->id;
-        // $validateData['jenis_kelamin'] = $request->jenis_kelamin;
-        // $validateData['tempat_lahir'] = $request->tempat_lahir;
-        // $validateData['alamat'] = $request->alamat;
-        // $validateData['no_handphone'] = $request->no_handphone;
-        // $validateData['jenjang_pendidikan'] = $request->jenjang_pendidikan;
-        // $validateData['jurusan'] = $request->jurusan;
-
         Biodata::updateOrCreate(
             ['user_id' => Auth::user()->id],
             $request->all()
