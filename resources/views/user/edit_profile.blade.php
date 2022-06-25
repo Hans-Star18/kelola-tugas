@@ -29,12 +29,18 @@
                     </button>
                 </li>
             </ul>
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ session()->get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
                     @include('user.partials.edit_biodata')
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
-                    @include('user.partials.ubah_password')
+                    @include('user.partials.edit_profile')
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-password" role="tabpanel">
                     @include('user.partials.ubah_password')

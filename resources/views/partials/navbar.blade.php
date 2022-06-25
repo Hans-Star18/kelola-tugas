@@ -62,6 +62,12 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
+                        <a class="dropdown-item" href="/">
+                            <i class="bx bx-home-circle me-2"></i>
+                            <span class="align-middle">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" href="/user">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>

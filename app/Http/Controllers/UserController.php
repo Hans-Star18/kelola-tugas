@@ -42,14 +42,20 @@ class UserController extends Controller
             $request->all()
         );
 
-        return redirect()->route('user_profil')->with('success', 'Berhasil Memperbarui Data');
+        return redirect()->back()->with('success', 'Berhasil Memperbarui Data');
     }
 
     public function edit_profile()
     {
+        $biodata = Biodata::where('user_id', Auth::user()->id)->first();
+
+        if (!$biodata) {
+            $biodata = new data_kosong();
+        }
+
         return view('user.edit_profile', [
             'title' => 'Edit Profile',
-            'biodata' => new data_kosong(),
+            'biodata' => $biodata,
         ]);
     }
 
