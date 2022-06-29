@@ -169,7 +169,7 @@
                                                 <div class="badge bg-success mb-2">{{ $item->status_name }}</div>
                                                 <div class="text-success">
                                                     Dikumpul Pada :
-                                                    {{ date('d - m - Y', strtotime($item->tanggal_dikumpul)) }}
+                                                    {{ date('d - m - Y', strtotime($item->updated_at)) }}
                                                 </div>
                                             @endif
                                             <div class="badge bg-secondary mt-2">{{ $item->mata_pelajaran }}</div>

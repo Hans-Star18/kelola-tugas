@@ -35,6 +35,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            @if (session()->has('pass_error'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ session()->get('pass_error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
                     @include('user.partials.edit_biodata')

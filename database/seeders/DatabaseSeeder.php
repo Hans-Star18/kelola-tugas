@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\MataPelajaran;
 use App\Models\Status;
-use App\Models\Task;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Task::factory(500)->create();
+        // Task::factory(500)->create();
 
         Status::create([
             'id' => '0',

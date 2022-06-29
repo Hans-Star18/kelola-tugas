@@ -25,8 +25,6 @@
                 <form action="/tugas" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="status" name="status_id" value="0">
-                    <input type="hidden" id="create" name="tanggal_dibuat" value="{{ date('d-m-Y h:i:s') }}">
-                    <input type="hidden" id="update" name="tanggal_dikumpul" value="{{ date('d-m-Y h:i:s') }}">
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label for="pilihMataPelajaran" class="form-label">Mata Pelajaran</label>
                         <select class="form-select @error('mata_pelajaran_id') is-invalid @enderror" id="pilihMataPelajaran"

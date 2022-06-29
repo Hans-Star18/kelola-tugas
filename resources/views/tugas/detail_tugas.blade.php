@@ -52,7 +52,7 @@
                     @else
                         <div class="badge bg-success mb-2">{{ $task->status_name }}</div>
                         <div class="text-success">
-                            Dikumpul Pada : {{ date('d - m - Y', strtotime($task->tanggal_dikumpul)) }}
+                            Dikumpul Pada : {{ date('d - m - Y', strtotime($task->updated_at)) }}
                         </div>
                     @endif
                     <br>

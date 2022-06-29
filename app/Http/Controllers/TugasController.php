@@ -8,6 +8,7 @@ use App\Models\MataPelajaran;
 use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TugasController extends Controller
@@ -163,9 +164,8 @@ class TugasController extends Controller
 
         // menambahkan data lainnya yang tidak perlu di validasi
         $validateData['deskripsi_tugas'] = $request->deskripsi_tugas;
-        $validateData['tanggal_dibuat'] = now();
-        $validateData['tanggal_dikumpul'] = now();
         $validateData['media_tugas'] = json_encode($namaFile);
+        $validateData['user_id'] = Auth::user()->id;
 
         // menyimpan data ke dalam database
         Task::create($validateData);
@@ -327,8 +327,6 @@ class TugasController extends Controller
 
         // menambahkan data lainnya yang tidak perlu di validasi
         $validateData['deskripsi_tugas'] = $request->deskripsi_tugas;
-        $validateData['tanggal_dibuat'] = now();
-        $validateData['tanggal_dikumpul'] = now();
         $validateData['media_tugas'] = json_encode($namaFile);
 
         // menyimpan data ke dalam database

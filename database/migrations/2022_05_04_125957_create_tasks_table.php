@@ -17,12 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('status_id')->default(0);
             $table->foreignId('mata_pelajaran_id');
+            $table->foreignId('user_id');
             $table->string('judul_tugas');
             $table->text('deskripsi_tugas')->nullable();
             $table->text('media_tugas')->nullable();
             $table->dateTime('deadline_at');
-            $table->dateTime('tanggal_dibuat');
-            $table->dateTime('tanggal_dikumpul')->nullable();
             $table->timestamps();
         });
     }

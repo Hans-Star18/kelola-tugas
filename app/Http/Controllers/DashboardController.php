@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -18,7 +19,7 @@ class DashboardController extends Controller
         $tugasLewatWaktuMingguIni = collect([]);
 
         // mengambil semua data tugas dari database
-        $tasks = Task::All();
+        $tasks = Task::where('user_id', Auth::user()->id)->get();
         // melooping data tugas dengan looping for
         for ($i = 0; $i < count($tasks); $i++) {
             $task = $tasks[$i];
@@ -27,7 +28,7 @@ class DashboardController extends Controller
             jika data created_at yang ada di table task -> days lebih kecil dari 7
             maka data tugas akan di masukkan ke wadah tugasDibuatMingguIni
              */
-            if ($task['tanggal_dibuat']->diff()->days <= 7 && $task['tanggal_dibuat']->diff()->invert == 0) {
+            if ($task['created_at']->diff()->days <= 7 && $task['updated_at']->diff()->invert == 0) {
                 $tugasDibuatMingguIni[] = $task;
             }
 
@@ -45,7 +46,7 @@ class DashboardController extends Controller
             jika data updated_at yang ada di table task -> days lebih kecil dari 7
             maka data tugas akan di masukkan ke wadah sudahSelesaiMingguIni
              */
-            if ($task['tanggal_dikumpul']->diff()->days <= 7 && $task['status_id'] == 1 && $task['tanggal_dikumpul']->diff()->invert == 0) {
+            if ($task['updated_at']->diff()->days <= 7 && $task['status_id'] == 1 && $task['updated_at']->diff()->invert == 0) {
                 $sudahSelesaiMingguIni[] = $task;
             }
 
@@ -82,7 +83,7 @@ class DashboardController extends Controller
          */
         return view('dashboard.index', [
             'title' => 'Dashboard',
-            'tasks' => Task::orderBy('deadline_at', 'desc'),
+            'tasks' => Task::where('user_id', Auth::user()->id)->orderBy('deadline_at', 'desc'),
             'tugasDibuatMingguIni' => $tugasDibuatMingguIni,
             'belumSelesaiMingguIni' => $belumSelesaiMingguIni,
             'sudahSelesaiMingguIni' => $sudahSelesaiMingguIni,

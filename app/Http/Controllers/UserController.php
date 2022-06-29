@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\hansStarEmail;
 use App\Models\Biodata;
+use App\Models\password_reset;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class data_kosong
 {
@@ -59,6 +63,40 @@ class UserController extends Controller
         ]);
     }
 
+    public function update(Request $request)
+    {
+        $rules = [
+            'name' => 'required|string|max:50',
+            'username' => 'required',
+            'email' => 'required|email:rfc,dns',
+        ];
+
+        $validateData = $request->validate($rules);
+
+        User::where("id", auth()->user()->id)->update($validateData);
+
+        return redirect()->back()->with('success', 'Berhasil Memperbarui Data');
+    }
+
+    public function update_password()
+    {
+        if (Hash::check(request('password'), Auth::user()->password)) {
+            $rules = [
+                'password_baru' => 'required|min:8|max:16',
+                'password_baru_repeat' => 'required|same:password_baru|min:8|max:16',
+            ];
+
+            $validateData = request()->validate($rules);
+
+            $validateData['password'] = bcrypt($validateData['password_baru']);
+
+            User::where("id", Auth::user()->id)->update(['password' => $validateData['password']]);
+
+            return back()->with('success', 'Berhasil Memperbarui Password');
+        }
+        return back()->with('pass_error', 'Password Lama Salah');
+    }
+
     public function login()
     {
         return view('user.login', [
@@ -80,6 +118,51 @@ class UserController extends Controller
         }
 
         return back()->with('loginError', 'Gagal masuk, coba lagi!');
+    }
+
+    public function forgot_password()
+    {
+        return view('user.forgot_password', [
+            'title' => 'Forgot Password',
+        ]);
+    }
+
+    public function reset_password()
+    {
+        return view('user.reset', [
+            'title' => 'Reset Password',
+        ]);
+    }
+
+    public function reset()
+    {
+        $email = request('email');
+        $token = request('token');
+
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            $user_token = password_reset::where('token', $token)->first();
+
+            if ($user_token) {
+                $rules = [
+                    'password_baru' => 'required|min:8|max:16',
+                    'password_baru_repeat' => 'required|same:password_baru|min:8|max:16',
+                ];
+
+                $validateData = request()->validate($rules);
+
+                $validateData['password'] = bcrypt($validateData['password_baru']);
+
+                User::where("email", $email)->update(['password' => $validateData['password']]);
+
+                return redirect()->route('login')->with('success', 'Berhasil Mengubah Password, Silahkan Login');
+            } else {
+                return redirect()->route('login')->with('loginError', 'Token Salah');
+            }
+        } else {
+            return redirect()->route('login')->with('loginError', 'Email Salah');
+        }
     }
 
     public function registrasi()
@@ -117,5 +200,26 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/user/login');
+    }
+
+    public function send_mail(Request $request)
+    {
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $token = $request->token;
+            $user_token = [
+                'email' => $email,
+                'token' => $token,
+            ];
+
+            Password_reset::create($user_token);
+            Mail::to($email)->send(new hansStarEmail());
+
+            return redirect()->back()->with('success', 'Link untuk reset password sudah terkirim, silahkan cek email anda');
+        } else {
+            return redirect()->back()->with('error_email', 'Email tidak ditemukan');
+        }
+
     }
 }
